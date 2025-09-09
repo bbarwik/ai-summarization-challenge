@@ -1,4 +1,4 @@
-"""CLI entry point for ai-pipeline."""
+"""CLI entry point for ai-summarization."""
 
 from ai_pipeline_core import DocumentList, FlowOptions
 from ai_pipeline_core.simple_runner import run_cli

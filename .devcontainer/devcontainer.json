@@ -1,17 +1,17 @@
 {
-    "name": "ai-pipeline development",
-    "dockerComposeFile": "docker-compose.yml",
+    "name": "ai-summarization development",
+    "dockerComposeFile": ["docker-compose.yml", "docker-compose.override.yml"],
     "remoteUser": "vscode",
-    "service": "ai-pipeline",
-    "workspaceFolder": "/workspaces/ai-pipeline",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/ai-pipeline,type=bind,consistency=cached",
+    "service": "ai-summarization",
+    "workspaceFolder": "/workspaces/ai-summarization",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/ai-summarization,type=bind,consistency=cached",
     "features": {
         "ghcr.io/anthropics/devcontainer-features/claude-code:latest": {},
         "ghcr.io/devcontainers/features/github-cli:1": {}
     },
     "overrideCommand": true,
     "containerEnv": {
-        "PYTHONPATH": "/workspaces/ai-pipeline",
+        "PYTHONPATH": "/workspaces/ai-summarization",
         "PYTHONDONTWRITEBYTECODE": "1"
     },
 	"customizations": {

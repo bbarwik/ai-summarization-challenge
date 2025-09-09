@@ -45,18 +45,18 @@ The `docker-compose.override.yml` file is gitignored and can contain user-specif
 
 ```bash
 # Run the template pipeline with defaults
-python -m ai_pipeline ./projects/my_project
+python -m ai_summarization ./projects/my_project
 
 # Select a flow range (indices are 1-based in this template)
-python -m ai_pipeline ./projects/my_project --start 2 --end 3
+python -m ai_summarization ./projects/my_project --start 2 --end 3
 
 # Choose models from FlowOptions
-python -m ai_pipeline ./projects/my_project \
+python -m ai_summarization ./projects/my_project \
   --core-model "gpt-5" \
   --small-model "gpt-5-mini"
 
 # Debug traces
-LMNR_DEBUG=true python -m ai_pipeline ./projects/my_project
+LMNR_DEBUG=true python -m ai_summarization ./projects/my_project
 ```
 
 ## Configuration
@@ -78,7 +78,7 @@ LMNR_DEBUG=true
 ## Project layout
 
 ```
-ai_pipeline/
+ai_summarization/
 ├── documents/                    # One file = one document class
 │   ├── flow/                     # Persistent documents
 │   └── task/                     # Ephemeral (task-scoped) documents

@@ -45,20 +45,20 @@ make install-dev
 
 ```bash
 # Full pipeline with defaults
-python -m ai_pipeline ./projects/my_project
+python -m ai_summarization ./projects/my_project
 
 # Specific flows (by index, 1-based)
-python -m ai_pipeline ./projects/my_project --start 2 --end 3
+python -m ai_summarization ./projects/my_project --start 2 --end 3
 # Note: --start/--end indices are 1-based in this template's runner
 # Example: --start 2 --end 3 runs the 2nd and 3rd flows
 
 # With custom models
-python -m ai_pipeline ./projects/my_project \
+python -m ai_summarization ./projects/my_project \
     --core-model "gpt-5" \
     --small-model "gpt-5-mini"
 
 # Debug mode
-LMNR_DEBUG=true python -m ai_pipeline ./projects/my_project
+LMNR_DEBUG=true python -m ai_summarization ./projects/my_project
 ```
 
 ## Project Structure
@@ -68,7 +68,7 @@ LMNR_DEBUG=true python -m ai_pipeline ./projects/my_project
 The template follows a flow-centric architecture where each workflow is self-contained:
 
 ```
-ai_pipeline/
+ai_summarization/
 ├── documents/                      # Document type definitions
 │   ├── flow/                      # Flow documents (persistent across flows)
 │   │   └── example_document.py    # ExampleDocument(FlowDocument)
@@ -116,8 +116,8 @@ Every flow follows this exact pattern:
 
 ```python
 from ai_pipeline_core import DocumentList, FlowConfig, pipeline_flow
-from ai_pipeline.flow_options import ProjectFlowOptions
-from ai_pipeline.documents.flow import InputDocument, OutputDocument
+from ai_summarization.flow_options import ProjectFlowOptions
+from ai_summarization.documents.flow import InputDocument, OutputDocument
 from .tasks import process_task
 
 class MyFlowConfig(FlowConfig):
@@ -307,7 +307,7 @@ optional_doc = documents.get_by("optional.txt", required=False)
 ### Flow Options
 
 ```python
-# ai_pipeline/flow_options.py
+# ai_summarization/flow_options.py
 from ai_pipeline_core import FlowOptions, ModelName
 from pydantic import Field
 
@@ -327,13 +327,13 @@ class ProjectFlowOptions(FlowOptions):
 The template includes a ready-to-use CLI:
 
 ```python
-# ai_pipeline/__main__.py
+# ai_summarization/__main__.py
 from ai_pipeline_core import DocumentList, FlowOptions
 from ai_pipeline_core.simple_runner import run_cli
 from .flow_options import ProjectFlowOptions
 from .flows import FLOW_CONFIGS, FLOWS
 
-TRACE_NAME = "ai-pipeline"
+TRACE_NAME = "ai-summarization"
 
 def initialize_project(options: FlowOptions) -> tuple[str, DocumentList]:
     # TODO: Implement project initialization
@@ -377,8 +377,8 @@ make clean             # Remove all build artifacts and caches
 ```python
 import pytest
 from ai_pipeline_core import DocumentList
-from ai_pipeline.documents.flow import SampleDocument
-from ai_pipeline.flows.step_01_example.tasks import process_task
+from ai_summarization.documents.flow import SampleDocument
+from ai_summarization.flows.step_01_example.tasks import process_task
 
 @pytest.mark.asyncio
 async def test_process_task():
@@ -391,7 +391,7 @@ async def test_process_task():
     documents = DocumentList([sample_doc])
 
     # Use FlowOptions for model selection
-    from ai_pipeline.flow_options import ProjectFlowOptions
+    from ai_summarization.flow_options import ProjectFlowOptions
     options = ProjectFlowOptions()
 
     # Act

@@ -23,7 +23,7 @@ test:
 	pytest
 
 test-cov:
-	pytest --cov=ai_pipeline --cov-report=html --cov-report=term
+	pytest --cov=ai_summarization --cov-report=html --cov-report=term
 
 lint:
 	ruff check .

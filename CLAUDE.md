@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ai-pipeline is an AI-powered project template built with the ai-pipeline-core framework, providing async AI pipeline orchestration with strong typing and efficient batch processing.
+ai-summarization is an AI-powered project template built with the ai-pipeline-core framework, providing async AI pipeline orchestration with strong typing and efficient batch processing.
 
 ### Key Components
 - **ai-pipeline-core**: The foundational framework providing async AI pipeline orchestration
@@ -24,7 +24,7 @@ ai-pipeline is an AI-powered project template built with the ai-pipeline-core fr
 The project follows a flow-centric architecture where each workflow is self-contained with its tasks and templates:
 
 ```
-ai_pipeline/
+ai_summarization/
 ├── documents/                      # Document type definitions
 │   ├── flow/                      # Flow documents (persistent across flows)
 │   │   └── example_document.py    # ExampleDocument(FlowDocument)
@@ -214,8 +214,8 @@ from ai_pipeline_core import FlowDocument
 
 ```python
 from ai_pipeline_core import DocumentList, FlowConfig, pipeline_flow
-from ai_pipeline.flow_options import ProjectFlowOptions
-from ai_pipeline.documents.flow import InputDocument, OutputDocument
+from ai_summarization.flow_options import ProjectFlowOptions
+from ai_summarization.documents.flow import InputDocument, OutputDocument
 from .tasks import process_task
 
 class MyFlowConfig(FlowConfig):
@@ -536,7 +536,7 @@ docs = DocumentList([doc1, doc2])  # No validation flags needed
 ### FlowOptions Pattern
 
 ```python
-# ai_pipeline/flow_options.py
+# ai_summarization/flow_options.py
 from ai_pipeline_core import FlowOptions, ModelName
 from pydantic import Field
 
@@ -554,7 +554,7 @@ class ProjectFlowOptions(FlowOptions):
 ### CLI Entry Point
 
 ```python
-# ai_pipeline/__main__.py
+# ai_summarization/__main__.py
 from ai_pipeline_core import DocumentList, FlowOptions
 from ai_pipeline_core.simple_runner import run_cli
 from .flow_options import ProjectFlowOptions
@@ -605,8 +605,8 @@ def disable_prefect_logging():
 ```python
 import pytest
 from ai_pipeline_core import DocumentList
-from ai_pipeline.documents.flow import SampleDocument
-from ai_pipeline.flows.step_01_example.tasks import process_task
+from ai_summarization.documents.flow import SampleDocument
+from ai_summarization.flows.step_01_example.tasks import process_task
 
 @pytest.mark.asyncio
 async def test_process_task():
@@ -619,7 +619,7 @@ async def test_process_task():
     documents = DocumentList([sample_doc])
 
     # Use FlowOptions for model selection
-    from ai_pipeline.flow_options import ProjectFlowOptions
+    from ai_summarization.flow_options import ProjectFlowOptions
     options = ProjectFlowOptions()
 
     # Act
@@ -654,8 +654,8 @@ make pre-commit        # Run all pre-commit hooks
 make clean             # Remove all build artifacts and caches
 
 # Running the application
-python -m ai_pipeline [arguments]
-ai-pipeline [arguments]  # After pip install
+python -m ai_summarization [arguments]
+ai-summarization [arguments]  # After pip install
 
 # Note: --start/--end indices are 1-based in this template's runner
 # Example: --start 2 --end 3 runs the 2nd and 3rd flows
@@ -731,7 +731,7 @@ Use markdown formatting limited to:
 ```python
 # CORRECT: Use Document objects for type safety
 from ai_pipeline_core import DocumentList
-from ai_pipeline.documents.flow import AnalysisDocument
+from ai_summarization.documents.flow import AnalysisDocument
 
 docs = DocumentList([
     AnalysisDocument.create(name=path, content=content)

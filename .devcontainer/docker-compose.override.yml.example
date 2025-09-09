@@ -3,7 +3,7 @@
 # The docker-compose.override.yml file is ignored by git
 
 services:
-  ai-pipeline:
+  ai-summarization:
     # Example: Mount local configuration files
     volumes:
        - ${HOME}/.claude:/home/vscode/.claude

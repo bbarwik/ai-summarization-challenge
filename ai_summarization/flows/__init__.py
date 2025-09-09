@@ -1,4 +1,4 @@
-"""Flow modules for the ai-pipeline pipeline."""
+"""Flow modules for the ai-summarization pipeline."""
 
 from typing import Any, Callable
 

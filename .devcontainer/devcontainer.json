@@ -1,0 +1,36 @@
+{
+    "name": "ai-pipeline development",
+    "dockerComposeFile": "docker-compose.yml",
+    "remoteUser": "vscode",
+    "service": "ai-pipeline",
+    "workspaceFolder": "/workspaces/ai-pipeline",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/ai-pipeline,type=bind,consistency=cached",
+    "features": {
+        "ghcr.io/anthropics/devcontainer-features/claude-code:latest": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "overrideCommand": true,
+    "containerEnv": {
+        "PYTHONPATH": "/workspaces/ai-pipeline",
+        "PYTHONDONTWRITEBYTECODE": "1"
+    },
+	"customizations": {
+		"vscode": {
+            "settings": {
+                "[python]": {
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.formatOnSave": true
+                },
+                "editor.codeActionsOnSave": {
+                    "source.fixAll": true
+                }
+            },
+            "extensions": [
+                "ms-python.python",
+                "charliermarsh.ruff",
+                "ms-vscode.makefile-tools"
+            ]
+		}
+	},
+    "postCreateCommand": "pip install --upgrade pip && pip install -e '.[dev]' && pre-commit install"
+}

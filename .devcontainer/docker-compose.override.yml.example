@@ -1,0 +1,20 @@
+# Example local overrides for devcontainer
+# Copy this file to docker-compose.override.yml and customize as needed
+# The docker-compose.override.yml file is ignored by git
+
+services:
+  ai-pipeline:
+    # Example: Mount local configuration files
+    volumes:
+       - ${HOME}/.claude:/home/vscode/.claude
+       - ${HOME}/.claude.json:/home/vscode/.claude.json
+       - ${HOME}/.config/gh:/home/vscode/.config/gh
+
+    # Example: Connect to external networks
+    # networks:
+    #   - shared_network
+
+# Example: Define external networks
+# networks:
+#   shared_network:
+#     external: true

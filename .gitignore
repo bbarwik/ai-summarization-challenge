@@ -161,3 +161,6 @@ output/
 
 # DevContainer local overrides
 .devcontainer/docker-compose.override.yml
+
+# Workspace
+!workspace/*

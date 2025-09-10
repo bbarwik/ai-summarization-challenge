@@ -4,12 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ai-summarization is an AI-powered project template built with the ai-pipeline-core framework, providing async AI pipeline orchestration with strong typing and efficient batch processing.
+ai-summarization is an AI-powered document summarization project built with the ai-pipeline-core framework, providing async AI pipeline orchestration with strong typing and efficient batch processing. This project processes ~200k tokens of research documents about AI assistant companies into a comprehensive report.
 
 ### Key Components
 - **ai-pipeline-core**: The foundational framework providing async AI pipeline orchestration
 - **Prefect**: Workflow orchestration for managing pipelines (accessed via pipeline decorators)
 - **FlowOptions**: Configuration system for model selection and flow parameters
+- **4-Stage Pipeline**: Planning → Writing → Review → Rewrite flows for document processing
 
 ### Technology Stack
 - **Python 3.12+** (required for modern type hints)
@@ -21,7 +22,9 @@ ai-summarization is an AI-powered project template built with the ai-pipeline-co
 
 ### Flow-Centric Organization
 
-The project follows a flow-centric architecture where each workflow is self-contained with its tasks and templates:
+The project follows a flow-centric architecture where each workflow is self-contained with its tasks and templates.
+
+**Note**: The examples below show the general structure. Actual implementations may vary based on project needs.
 
 ```
 ai_summarization/
@@ -66,9 +69,10 @@ ai_summarization/
 
 ### Model and Document Conventions
 
-- **FILES enum**: Prefer FILES enum when filename identity matters across steps; otherwise plain strings are fine.
+- **FILES enum**: Use FILES enum when filename identity matters across steps. Documents that accept any file (like InputDocument) don't need FILES enum since filenames aren't pre-defined.
 - **Models**: Always use type `ModelName` for model parameters and variables; always pass models coming from flow_options (e.g., `flow_options.core_model`).
 - **Vision and structured-output**: Assume all models support documents/vision; search models (`*-search`) do not support structured output.
+- **FlowOptions fields**: The `task_description` field in ProjectFlowOptions is project-specific and appropriate for this AI summarization task.
 
 ## Core Principles
 
@@ -213,52 +217,57 @@ from ai_pipeline_core import FlowDocument
 ### Flow Definition (MUST follow exactly)
 
 ```python
+# NOTE: These are example patterns. Actual implementation details may vary.
 from ai_pipeline_core import DocumentList, FlowConfig, pipeline_flow
 from ai_summarization.flow_options import ProjectFlowOptions
-from ai_summarization.documents.flow import InputDocument, OutputDocument
-from .tasks import process_task
+from ai_summarization.documents.flow import InputDocument, PlanDocument
+from .tasks import planning_task
 
-class MyFlowConfig(FlowConfig):
-    """Configuration for my flow."""
+class PlanningFlowConfig(FlowConfig):
+    """Configuration for planning flow."""
 
     # CRITICAL: Each flow MUST have a unique OUTPUT_DOCUMENT_TYPE!
     # The OUTPUT_DOCUMENT_TYPE should NOT be in INPUT_DOCUMENT_TYPES
     # to prevent circular dependencies between flows.
     INPUT_DOCUMENT_TYPES = [InputDocument]
-    OUTPUT_DOCUMENT_TYPE = OutputDocument  # Must be a different class
+    OUTPUT_DOCUMENT_TYPE = PlanDocument  # Must be a different class
 
 @pipeline_flow  # No parameters!
-async def my_flow(
+async def planning_flow(
     project_name: str,
     documents: DocumentList,
     flow_options: ProjectFlowOptions,
 ) -> DocumentList:
-    """Process documents through my flow."""
+    """Process documents through planning flow."""
 
     # STEP 1: Validate and get input documents
-    input_docs = documents.filter_by(*MyFlowConfig.INPUT_DOCUMENT_TYPES)
+    input_docs = documents.filter_by(*PlanningFlowConfig.INPUT_DOCUMENT_TYPES)
 
     # STEP 2: Process with tasks
     # If task returns a document, use it directly
-    result_doc = await process_task(
+    result_doc = await planning_task(
         documents=input_docs,
         model=flow_options.core_model,  # Pass models from flow_options
+        task_description=flow_options.task_description,  # Project-specific field
     )
 
     # STEP 3: MUST use create_and_validate_output
     # If task returns the correct document type, pass it directly
-    return MyFlowConfig.create_and_validate_output([result_doc])
+    return PlanningFlowConfig.create_and_validate_output([result_doc])
 ```
 
 ### Flow Registration (flows/__init__.py)
 
 ```python
-from .step_01_example import ExampleFlowConfig, example_flow
-from .step_02_analysis import AnalysisFlowConfig, analysis_flow
+# Example from actual ai-summarization project
+from .step_01_planning import PlanningFlowConfig, planning_flow
+from .step_02_writing import WritingFlowConfig, writing_flow
+from .step_03_review import ReviewFlowConfig, review_flow
+from .step_04_rewrite import RewriteFlowConfig, rewrite_flow
 
 # MUST export these lists
-FLOW_CONFIGS = [ExampleFlowConfig, AnalysisFlowConfig]
-FLOWS = [example_flow, analysis_flow]
+FLOW_CONFIGS = [PlanningFlowConfig, WritingFlowConfig, ReviewFlowConfig, RewriteFlowConfig]
+FLOWS = [planning_flow, writing_flow, review_flow, rewrite_flow]
 
 # MUST have same length
 assert len(FLOW_CONFIGS) == len(FLOWS)
@@ -271,10 +280,10 @@ __all__ = ["FLOW_CONFIGS", "FLOWS"]
 ### Context vs Messages Split
 
 **Important**: Split static and dynamic content for caching benefits:
-- **context**: Static instructions, schemas, examples (cached by LLM provider)
-- **messages**: Per-call dynamic data (not cached)
+- **context**: Static context like schemas, examples, or persistent configuration (sent first to LLM, cached by provider)
+- **messages**: Dynamic content including the main prompt and per-call data (sent after context)
 
-This pattern reduces token usage and costs through provider caching.
+In practice, the prompt often goes in messages while static instructions go in context. This pattern reduces token usage and costs through provider caching.
 
 ### Logging Guidelines
 
@@ -314,23 +323,25 @@ async def process_task(
     # For multi-line prompts, use Jinja2 file with matching name
     prompt = prompt_manager.get(
         "process_task",  # Extension optional, MUST match task file name!
-        context="specific instructions"
+        task_description="specific task requirements"
     )
 
     # For single-line prompts, use inline string
     # prompt = "Analyze this document and provide a summary."
 
-    # Build static context from prompt (cached)
-    static_context = AIMessages([prompt])
+    # Build messages from prompt and documents
+    # NOTE: In practice, prompt often goes in messages (dynamic)
+    # while static schemas/examples go in context
+    messages = AIMessages([prompt] + documents.to_list())
 
-    # Dynamic per-call content
-    dynamic_messages = AIMessages(documents)
+    # Optional: Static context for schemas/examples (cached)
+    # context = AIMessages([static_schema])  # If you have static content
 
-    # Call LLM with context and messages split
+    # Call LLM
     result = await llm.generate(
         model=model,
-        context=static_context,  # Static instructions (cached)
-        messages=dynamic_messages  # Dynamic content
+        # context=context,  # Optional: static content (sent first, cached)
+        messages=messages  # Dynamic prompt and documents
     )
 
     # Create and return document
@@ -362,10 +373,6 @@ async def structured_analysis(
     model: ModelName,  # Always use ModelName type
 ) -> AnalysisDocument:
     """Generate structured analysis."""
-
-    # Optional: Add prompt for context
-    # prompt = "Analyze and score the following content."
-    # context = AIMessages([prompt])
 
     messages = AIMessages(documents)
 
@@ -423,34 +430,36 @@ async def parallel_flow(
 ### __init__.py Examples
 
 ```python
-# documents/__init__.py
-from .flow import AnalysisDocument, ResearchDocument
-from .task import DraftDocument
+# documents/__init__.py - Example
+from .flow import InputDocument, PlanDocument, DraftDocument, ReviewDocument, OutputDocument
+# Note: task/ directory may be empty if no task-scoped documents are used
 
-__all__ = ["AnalysisDocument", "ResearchDocument", "DraftDocument"]
+__all__ = ["InputDocument", "PlanDocument", "DraftDocument", "ReviewDocument", "OutputDocument"]
 ```
 
 ```python
-# documents/flow/__init__.py
-from .analysis_document import AnalysisDocument
-from .research_document import ResearchDocument
+# documents/flow/__init__.py - Example from ai-summarization
+from .input_document import InputDocument
+from .plan_document import PlanDocument
+from .draft_document import DraftDocument
+from .review_document import ReviewDocument
+from .output_document import OutputDocument
 
-__all__ = ["AnalysisDocument", "ResearchDocument"]
+__all__ = ["InputDocument", "PlanDocument", "DraftDocument", "ReviewDocument", "OutputDocument"]
 ```
 
 ```python
-# flows/step_01_example/__init__.py
-from .example_flow import ExampleFlowConfig, example_flow
+# flows/step_01_planning/__init__.py - Example
+from .planning_flow import PlanningFlowConfig, planning_flow
 
-__all__ = ["ExampleFlowConfig", "example_flow"]
+__all__ = ["PlanningFlowConfig", "planning_flow"]
 ```
 
 ```python
-# flows/step_01_example/tasks/__init__.py
-from .process_task import process_task
-from .validate_task import validate_task
+# flows/step_01_planning/tasks/__init__.py - Example
+from .create_plan_task import create_plan_task
 
-__all__ = ["process_task", "validate_task"]
+__all__ = ["create_plan_task"]
 ```
 
 ### Document Type Hierarchy
@@ -547,8 +556,12 @@ class ProjectFlowOptions(FlowOptions):
     core_model: ModelName = Field(default="gpt-5")
     small_model: ModelName = Field(default="gpt-5-mini")
 
-    # ONLY add project-specific fields if explicitly required
-    # Don't add fields unless the project needs them
+    # Project-specific fields are allowed when needed for the task
+    # Example: task_description for AI summarization project
+    task_description: str = Field(
+        default="...",  # Project-specific task description
+        description="Main task for report generation"
+    )
 ```
 
 ### CLI Entry Point
@@ -560,19 +573,20 @@ from ai_pipeline_core.simple_runner import run_cli
 from .flow_options import ProjectFlowOptions
 from .flows import FLOW_CONFIGS, FLOWS
 
-TRACE_NAME = (__package__ or __name__).split(".")[0].replace("_", "-")
+TRACE_NAME = "ai-summarization"
 
 def initialize_project(options: FlowOptions) -> tuple[str, DocumentList]:
-    # TODO: Implement project initialization
-    return "", DocumentList([])
+    # Initialize project with input documents
+    # This is optional - can be omitted if not needed
+    return "workspace", DocumentList([])
 
 def main():
     run_cli(
         flows=FLOWS,
         flow_configs=FLOW_CONFIGS,
         options_cls=ProjectFlowOptions,
-        initializer=initialize_project,
-        trace_name=TRACE_NAME,  # Consistent use of constant
+        initializer=initialize_project,  # Optional parameter
+        trace_name=TRACE_NAME,
     )
 
 if __name__ == "__main__":
@@ -810,15 +824,17 @@ ls /home/vscode/.local/lib/python3.12/site-packages/ai_pipeline_core/
 - Always use create_and_validate_output() at the end of flows
 - Never specify default models in tasks - pass from FlowOptions
 - Always wrap documents in AIMessages for LLM calls
-- Prefer FILES enum when filename identity matters across steps; otherwise plain strings are acceptable
+- FILES enum is for pre-defined filenames; documents accepting any file don't need it
 - Document subclasses should NOT start with 'Test' prefix (pytest conflict)
 - If task returns the correct document type, use it directly (don't recreate)
 - Each flow must have a unique OUTPUT_DOCUMENT_TYPE class
 - Prompt files must match task file names exactly
 - Use debug level for logging, avoid meaningless logs
-- Only add FlowOptions fields that are explicitly needed
+- Project-specific FlowOptions fields are acceptable when needed (e.g., task_description)
 - All imports are required - no try/except import patterns
-- Split static context and dynamic messages for LLM caching benefits
+- Context is for static content (sent first), messages for dynamic content including prompts
+- The initializer parameter in run_cli is optional
+- Examples in documentation are illustrative and may differ from actual implementation
 
 ## Final Rule
 

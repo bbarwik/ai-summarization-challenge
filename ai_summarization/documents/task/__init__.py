@@ -1,3 +1,3 @@
-"""Task documents for temporary processing."""
+"""Task-scoped (ephemeral) document types."""
 
-__all__ = []
+__all__: list[str] = []

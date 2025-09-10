@@ -3,7 +3,7 @@ services:
     image: mcr.microsoft.com/devcontainers/python:3.12-bookworm
     init: true
     command: /bin/sh -lc "trap 'exit 0' TERM; while :; do sleep 600; done"
-    working_dir: /workspaces/ai-pipeline
+    working_dir: /workspaces/ai-summarization
     user: vscode
     volumes:
       - ..:/workspaces/ai-summarization:cached

@@ -1,0 +1,1 @@
+"""Shared prompt templates."""

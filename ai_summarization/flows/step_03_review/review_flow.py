@@ -20,7 +20,7 @@ class ReviewFlowConfig(FlowConfig):
     OUTPUT_DOCUMENT_TYPE = ReviewDocument
 
 
-@pipeline_flow
+@pipeline_flow(config=ReviewFlowConfig)
 async def review_flow(
     project_name: str,
     documents: DocumentList,

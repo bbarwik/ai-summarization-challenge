@@ -1,18 +1,11 @@
 """Pipeline flows for AI summarization."""
 
-from .step_01_planning import PlanningFlowConfig, planning_flow
-from .step_02_writing import WritingFlowConfig, writing_flow
-from .step_03_review import ReviewFlowConfig, review_flow
-from .step_04_rewrite import RewriteFlowConfig, rewrite_flow
+from .step_01_planning import planning_flow
+from .step_02_writing import writing_flow
+from .step_03_review import review_flow
+from .step_04_rewrite import rewrite_flow
 
-# MUST export these lists
-FLOW_CONFIGS = [
-    PlanningFlowConfig,
-    WritingFlowConfig,
-    ReviewFlowConfig,
-    RewriteFlowConfig,
-]
-
+# MUST export FLOWS list
 FLOWS = [
     planning_flow,
     writing_flow,
@@ -20,7 +13,4 @@ FLOWS = [
     rewrite_flow,
 ]
 
-# MUST have same length
-assert len(FLOW_CONFIGS) == len(FLOWS)
-
-__all__ = ["FLOW_CONFIGS", "FLOWS"]
+__all__ = ["FLOWS"]

@@ -15,7 +15,7 @@ class PlanningFlowConfig(FlowConfig):
     OUTPUT_DOCUMENT_TYPE = PlanDocument
 
 
-@pipeline_flow
+@pipeline_flow(config=PlanningFlowConfig)
 async def planning_flow(
     project_name: str,
     documents: DocumentList,

@@ -15,7 +15,7 @@ class WritingFlowConfig(FlowConfig):
     OUTPUT_DOCUMENT_TYPE = DraftDocument
 
 
-@pipeline_flow
+@pipeline_flow(config=WritingFlowConfig)
 async def writing_flow(
     project_name: str,
     documents: DocumentList,

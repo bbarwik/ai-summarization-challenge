@@ -21,7 +21,7 @@ class RewriteFlowConfig(FlowConfig):
     OUTPUT_DOCUMENT_TYPE = OutputDocument
 
 
-@pipeline_flow
+@pipeline_flow(config=RewriteFlowConfig)
 async def rewrite_flow(
     project_name: str,
     documents: DocumentList,

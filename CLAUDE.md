@@ -14,7 +14,7 @@ ai-summarization is an AI-powered document summarization project built with the 
 
 ### Technology Stack
 - **Python 3.12+** (required for modern type hints)
-- **ai-pipeline-core>=0.1.14** as the core framework
+- **ai-pipeline-core>=0.2.0** as the core framework (v0.2.0 introduces mandatory FlowConfig)
 - **Pydantic** for data validation and immutable models
 - **httpx** for async HTTP operations (never use requests)
 
@@ -61,7 +61,7 @@ ai_summarization/
 3. **Shared tasks** (used by 2+ flows) go directly in `tasks/` directory (e.g., `tasks/validate.py`)
 4. **Shared prompts** go in `prompts/` directory
 5. **Each flow** is self-contained with all dependencies
-6. **flows/__init__.py** MUST export FLOWS and FLOW_CONFIGS lists
+6. **flows/__init__.py** MUST export FLOWS list
 7. **One file = one document class** in `documents/` directory
 8. **Pydantic models** used by documents should be defined in the same file
 
@@ -232,7 +232,7 @@ class PlanningFlowConfig(FlowConfig):
     INPUT_DOCUMENT_TYPES = [InputDocument]
     OUTPUT_DOCUMENT_TYPE = PlanDocument  # Must be a different class
 
-@pipeline_flow  # No parameters!
+@pipeline_flow(config=PlanningFlowConfig)  # Config parameter is REQUIRED in v0.2.0+
 async def planning_flow(
     project_name: str,
     documents: DocumentList,
@@ -260,19 +260,15 @@ async def planning_flow(
 
 ```python
 # Example from actual ai-summarization project
-from .step_01_planning import PlanningFlowConfig, planning_flow
-from .step_02_writing import WritingFlowConfig, writing_flow
-from .step_03_review import ReviewFlowConfig, review_flow
-from .step_04_rewrite import RewriteFlowConfig, rewrite_flow
+from .step_01_planning import planning_flow
+from .step_02_writing import writing_flow
+from .step_03_review import review_flow
+from .step_04_rewrite import rewrite_flow
 
-# MUST export these lists
-FLOW_CONFIGS = [PlanningFlowConfig, WritingFlowConfig, ReviewFlowConfig, RewriteFlowConfig]
+# MUST export FLOWS list (v0.2.0+ configs are attached via decorators)
 FLOWS = [planning_flow, writing_flow, review_flow, rewrite_flow]
 
-# MUST have same length
-assert len(FLOW_CONFIGS) == len(FLOWS)
-
-__all__ = ["FLOW_CONFIGS", "FLOWS"]
+__all__ = ["FLOWS"]
 ```
 
 ## Task Development Pattern
@@ -400,7 +396,7 @@ async def structured_analysis(
 ```python
 import asyncio
 
-@pipeline_flow
+@pipeline_flow(config=ParallelFlowConfig)
 async def parallel_flow(
     project_name: str,
     documents: DocumentList,
@@ -571,7 +567,7 @@ class ProjectFlowOptions(FlowOptions):
 from ai_pipeline_core import DocumentList, FlowOptions
 from ai_pipeline_core.simple_runner import run_cli
 from .flow_options import ProjectFlowOptions
-from .flows import FLOW_CONFIGS, FLOWS
+from .flows import FLOWS
 
 TRACE_NAME = "ai-summarization"
 
@@ -582,8 +578,7 @@ def initialize_project(options: FlowOptions) -> tuple[str, DocumentList]:
 
 def main():
     run_cli(
-        flows=FLOWS,
-        flow_configs=FLOW_CONFIGS,
+        flows=FLOWS,  # Flow configs are now attached via decorators in v0.2.0+
         options_cls=ProjectFlowOptions,
         initializer=initialize_project,  # Optional parameter
         trace_name=TRACE_NAME,
@@ -821,6 +816,7 @@ ls /home/vscode/.local/lib/python3.12/site-packages/ai_pipeline_core/
 - If you have issues with 3rd party dependencies, check the source code directly
 - Always use module-level PromptManager and logger initialization
 - Never combine @pipeline_task/@pipeline_flow with @trace
+- Always use @pipeline_flow with config parameter (REQUIRED in v0.2.0+)
 - Always use create_and_validate_output() at the end of flows
 - Never specify default models in tasks - pass from FlowOptions
 - Always wrap documents in AIMessages for LLM calls

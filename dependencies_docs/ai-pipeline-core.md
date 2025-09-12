@@ -40,7 +40,7 @@ from ai_pipeline_core.llm import generate  # NO!
 from ai_pipeline_core.documents import FlowDocument  # NO!
 
 FRAMEWORK RULES (Use by default, unless instructed otherwise):
-1. Decorators: Use @pipeline_task, @pipeline_flow WITHOUT parameters
+1. Decorators: Use @pipeline_task WITHOUT parameters, @pipeline_flow WITH config
 2. Logging: Use get_pipeline_logger(__name__) - NEVER print() or logging module
 3. LLM calls: Use AIMessages or str. Wrap Documents in AIMessages; do not call .text yourself
 4. Options: DO NOT use options parameter - omit it entirely (defaults are optimal)
@@ -62,13 +62,17 @@ Core Capabilities:
 
 Quick Start:
 >>> from ai_pipeline_core import (
-...     pipeline_flow, FlowDocument, DocumentList, FlowOptions, llm, AIMessages
+...     pipeline_flow, FlowDocument, DocumentList, FlowOptions, FlowConfig, llm, AIMessages
 ... )
 >>>
 >>> class OutputDoc(FlowDocument):
 ...     '''Analysis result document.'''
 >>>
->>> @pipeline_flow
+>>> class MyFlowConfig(FlowConfig):
+...     INPUT_DOCUMENT_TYPES = []
+...     OUTPUT_DOCUMENT_TYPE = OutputDoc
+>>>
+>>> @pipeline_flow(config=MyFlowConfig)
 >>> async def analyze_flow(
 ...     project_name: str,
 ...     documents: DocumentList,
@@ -400,9 +404,10 @@ expect `messages` to be `AIMessages` or `str`. If you start from a Document or a
 of Documents, build AIMessages first (e.g., `AIMessages([doc])` or `AIMessages(docs)`).
 
 CAUTION: AIMessages is a list subclass. Always use list construction (e.g.,
-`AIMessages(["text"])`) or empty constructor with append (e.g., `AIMessages(); messages.append("text")`).
-Never pass raw strings directly to the constructor (`AIMessages("text")`) as this
-will iterate over the string characters instead of treating it as a single message.
+`AIMessages(["text"])`) or empty constructor with append (e.g.,
+`AIMessages(); messages.append("text")`). Never pass raw strings directly to the
+constructor (`AIMessages("text")`) as this will iterate over the string characters
+instead of treating it as a single message.
 
 **Example**:
 
@@ -530,8 +535,9 @@ Best Practices:
   If string, converted to AIMessages internally.
 - `options` - DEPRECATED - DO NOT USE. Reserved for internal framework usage only.
   Framework defaults are production-optimized (3 retries, 10s delay, 300s timeout).
-  Configure model behavior centrally via LiteLLM proxy settings or environment variables,
-  not per API call. Provider-specific settings should be configured at the proxy level.
+  Configure model behavior centrally via LiteLLM proxy settings or environment
+  variables, not per API call. Provider-specific settings should be configured
+  at the proxy level.
 
 **Returns**:
 
@@ -719,7 +725,8 @@ directly into structured format:
   - PDFs require models with both document processing AND structured output support
   - Many models support either vision OR structured output, but not both
   - Test your specific model+document combination before production use
-  - Consider two-step approach: generate() for analysis, then generate_structured() for formatting
+  - Consider two-step approach: generate() for analysis, then generate_structured()
+  for formatting
 
 **Returns**:
 
@@ -791,7 +798,8 @@ directories.
 Search strategy:
 1. Local directory (same as calling module)
 2. Local 'prompts' subdirectory
-3. Parent 'prompts' directories (search ascends parent packages up to the package boundary or after 4 parent levels, whichever comes first)
+3. Parent 'prompts' directories (search ascends parent packages up to the package
+boundary or after 4 parent levels, whichever comes first)
 
 Key features:
 - Automatic template discovery
@@ -842,7 +850,8 @@ and shared (project-wide) templates.
 Search hierarchy:
 1. Same directory as the calling module (for local templates)
 2. 'prompts' subdirectory in the calling module's directory
-3. 'prompts' directories in parent packages (search ascends parent packages up to the package boundary or after 4 parent levels, whichever comes first)
+3. 'prompts' directories in parent packages (search ascends parent packages up to the
+package boundary or after 4 parent levels, whichever comes first)
 
 **Attributes**:
 
@@ -925,7 +934,8 @@ module's location and extends to parent package directories.
   2. /project/flows/prompts/ (if exists)
   3. /project/prompts/ (if /project has __init__.py)
 
-  Search ascends parent packages up to the package boundary or after 4 parent levels, whichever comes first.
+  Search ascends parent packages up to the package boundary or after 4 parent
+  levels, whichever comes first.
 
 **Example**:
 
@@ -1122,8 +1132,10 @@ Same input/output types would create infinite loops or circular dependencies.
   ...     OUTPUT_DOCUMENT_TYPE = ProcessedDocument  # Different type!
   >>>
   >>> # Use in @pipeline_flow - RECOMMENDED PATTERN
-  >>> @pipeline_flow(name="processing")
-  >>> async def process(config: ProcessingFlowConfig, docs: DocumentList) -> DocumentList:
+  >>> @pipeline_flow(config=ProcessingFlowConfig, name="processing")
+  >>> async def process(
+  ...     project_name: str, docs: DocumentList, flow_options: FlowOptions
+  ... ) -> DocumentList:
   ...     outputs = []
   ...     # ... processing logic ...
   ...     return config.create_and_validate_output(outputs)
@@ -1168,8 +1180,10 @@ and validates it matches the expected OUTPUT_DOCUMENT_TYPE.
 
 **Example**:
 
-  >>> @pipeline_flow(name="my_flow")
-  >>> async def process_flow(config: MyFlowConfig, ...) -> DocumentList:
+  >>> @pipeline_flow(config=MyFlowConfig, name="my_flow")
+  >>> async def process_flow(
+  ...     project_name: str, documents: DocumentList, flow_options: FlowOptions
+  ... ) -> DocumentList:
   >>>     outputs = []
   >>>     # ... processing logic ...
   >>>     outputs.append(OutputDoc(...))
@@ -1201,31 +1215,11 @@ Decorate an async function as a traced Prefect task.
 Wraps an async function with both Prefect task functionality and
 LMNR tracing. The function MUST be async (declared with 'async def').
 
-IMPORTANT: Always use @pipeline_task instead of @task for AI pipeline code.
-@pipeline_task includes automatic tracing and is the standard for all pipeline tasks.
-Only use plain @task from prefect.tasks for utility functions that don't need tracing.
-
-CRITICAL: Never combine @pipeline_task with @trace decorator - this includes tracing
-automatically. The framework will raise TypeError if you try to use both decorators.
-
-WRONG:
-@trace  # NO! Already included in @pipeline_task
-@pipeline_task
-async def my_task(): ...
-
-@pipeline_task
-@trace  # NO! Already included
-async def my_task(): ...
-
-@task  # NO! Use @pipeline_task for pipeline code
-async def my_task(): ...
-
-CORRECT:
-@pipeline_task  # Includes tracing automatically
-async def my_task(): ...
+IMPORTANT: Never combine with @trace decorator - this includes tracing automatically.
+The framework will raise TypeError if you try to use both decorators together.
 
 Best Practice - Use Defaults:
-By default, use this decorator WITHOUT any parameters unless instructed otherwise.
+For 90% of use cases, use this decorator WITHOUT any parameters.
 Only specify parameters when you have EXPLICIT requirements.
 
 **Arguments**:
@@ -1307,10 +1301,16 @@ Only specify parameters when you have EXPLICIT requirements.
   Tasks are automatically traced with LMNR and appear in
   both Prefect and LMNR dashboards.
 
+**See Also**:
+
+  - pipeline_flow: For flow-level decoration
+  - trace: Lower-level tracing decorator
+  - prefect.task: Standard Prefect task (no tracing)
+
 ### pipeline_flow
 
 ```python
-def pipeline_flow(__fn: _DocumentsFlowCallable[FO_contra] | None = None, *, trace_level: TraceLevel = "always", trace_ignore_input: bool = False, trace_ignore_output: bool = False, trace_ignore_inputs: list[str] | None = None, trace_input_formatter: Callable[..., str] | None = None, trace_output_formatter: Callable[..., str] | None = None, trace_cost: float | None = None, name: str | None = None, version: str | None = None, flow_run_name: Union[Callable[[], str], str] | None = None, retries: int | None = None, retry_delay_seconds: int | float | None = None, task_runner: TaskRunner[PrefectFuture[Any]] | None = None, description: str | None = None, timeout_seconds: int | float | None = None, validate_parameters: bool = True, persist_result: bool | None = None, result_storage: ResultStorage | str | None = None, result_serializer: ResultSerializer | str | None = None, cache_result_in_memory: bool = True, log_prints: bool | None = None, on_completion: list[FlowStateHook[Any, Any]] | None = None, on_failure: list[FlowStateHook[Any, Any]] | None = None, on_cancellation: list[FlowStateHook[Any, Any]] | None = None, on_crashed: list[FlowStateHook[Any, Any]] | None = None, on_running: list[FlowStateHook[Any, Any]] | None = None) -> _FlowLike[FO_contra] | Callable[[_DocumentsFlowCallable[FO_contra]], _FlowLike[FO_contra]]
+def pipeline_flow(*, config: type[FlowConfig], trace_level: TraceLevel = "always", trace_ignore_input: bool = False, trace_ignore_output: bool = False, trace_ignore_inputs: list[str] | None = None, trace_input_formatter: Callable[..., str] | None = None, trace_output_formatter: Callable[..., str] | None = None, trace_cost: float | None = None, name: str | None = None, version: str | None = None, flow_run_name: Union[Callable[[], str], str] | None = None, retries: int | None = None, retry_delay_seconds: int | float | None = None, task_runner: TaskRunner[PrefectFuture[Any]] | None = None, description: str | None = None, timeout_seconds: int | float | None = None, validate_parameters: bool = True, persist_result: bool | None = None, result_storage: ResultStorage | str | None = None, result_serializer: ResultSerializer | str | None = None, cache_result_in_memory: bool = True, log_prints: bool | None = None, on_completion: list[FlowStateHook[Any, Any]] | None = None, on_failure: list[FlowStateHook[Any, Any]] | None = None, on_cancellation: list[FlowStateHook[Any, Any]] | None = None, on_crashed: list[FlowStateHook[Any, Any]] | None = None, on_running: list[FlowStateHook[Any, Any]] | None = None) -> Callable[[_DocumentsFlowCallable[FO_contra]], _FlowLike[FO_contra]]
 ```
 
 Decorate an async flow for document processing.
@@ -1318,35 +1318,11 @@ Decorate an async flow for document processing.
 Wraps an async function as a Prefect flow with tracing and type safety.
 The decorated function MUST be async and follow the required signature.
 
-IMPORTANT: Always use @pipeline_flow instead of @flow for AI pipeline code.
-@pipeline_flow includes automatic tracing and is the standard for all pipeline flows.
-Only use plain @flow from prefect.flows for utility functions that don't need tracing.
-
-CRITICAL: Never combine @pipeline_flow with @trace decorator - this includes tracing
-automatically. The framework will raise TypeError if you try to use both decorators.
-
-WRONG:
-@trace  # NO! Already included in @pipeline_flow
-@pipeline_flow
-async def my_flow(...): ...
-
-@pipeline_flow
-@trace  # NO! Already included
-async def my_flow(...): ...
-
-@flow  # NO! Use @pipeline_flow for pipeline code
-async def my_flow(...): ...
-
-CORRECT:
-@pipeline_flow  # Includes tracing automatically
-async def my_flow(
-project_name: str,
-documents: DocumentList,
-flow_options: FlowOptions
-) -> DocumentList: ...
+IMPORTANT: Never combine with @trace decorator - this includes tracing automatically.
+The framework will raise TypeError if you try to use both decorators together.
 
 Best Practice - Use Defaults:
-By default, use this decorator WITHOUT any parameters unless instructed otherwise.
+For 90% of use cases, use this decorator WITHOUT any parameters.
 Only specify parameters when you have EXPLICIT requirements.
 
 Required function signature:
@@ -1354,16 +1330,15 @@ async def flow_fn(
 project_name: str,         # Project/pipeline identifier
 documents: DocumentList,   # Input documents to process
 flow_options: FlowOptions, # Configuration (or subclass)
-*args,                     # Additional positional args for custom parameters
-**kwargs                   # Additional keyword args for custom parameters
 ) -> DocumentList             # Must return DocumentList
-
-Note: *args and **kwargs allow for defining custom parameters on your flow
-function, which can be passed during execution for flow-specific needs.
 
 **Arguments**:
 
 - `__fn` - Function to decorate (when used without parentheses).
+
+  Config parameter:
+- `config` - Required FlowConfig class for document loading/saving. Enables
+  automatic loading from string paths and saving outputs.
 
   Tracing parameters:
 - `trace_level` - When to trace ("always", "debug", "off").
@@ -1407,10 +1382,14 @@ function, which can be passed during execution for flow-specific needs.
 
 **Example**:
 
-  >>> from ai_pipeline_core import FlowOptions
+  >>> from ai_pipeline_core import FlowOptions, FlowConfig
   >>>
-  >>> # RECOMMENDED - No parameters needed!
-  >>> @pipeline_flow
+  >>> class MyFlowConfig(FlowConfig):
+  ...     INPUT_DOCUMENT_TYPES = [InputDoc]
+  ...     OUTPUT_DOCUMENT_TYPE = OutputDoc
+  >>>
+  >>> # Standard usage with config
+  >>> @pipeline_flow(config=MyFlowConfig)
   >>> async def analyze_documents(
   ...     project_name: str,
   ...     documents: DocumentList,
@@ -1423,8 +1402,8 @@ function, which can be passed during execution for flow-specific needs.
   ...         results.append(result)
   ...     return DocumentList(results)
   >>>
-  >>> # With parameters (only when necessary):
-  >>> @pipeline_flow(retries=2)  # Only for flows that need retry logic
+  >>> # With additional parameters:
+  >>> @pipeline_flow(config=MyFlowConfig, retries=2)
   >>> async def critical_flow(
   ...     project_name: str,
   ...     documents: DocumentList,
@@ -1444,6 +1423,13 @@ function, which can be passed during execution for flow-specific needs.
   - Return type is validated at runtime
   - FlowOptions can be subclassed for custom configuration
   - All Prefect flow methods (.serve(), .deploy()) are available
+
+**See Also**:
+
+  - pipeline_task: For task-level decoration
+  - FlowConfig: Type-safe flow configuration
+  - FlowOptions: Base class for flow options
+  - simple_runner.run_pipeline: Execute flows locally
 
 
 ## ai_pipeline_core.logging.logging_config
@@ -1472,6 +1458,11 @@ Returns a Prefect-integrated logger with proper configuration.
   >>> logger.info("Module initialized")
 
 
+## ai_pipeline_core.storage
+
+Storage module for ai_pipeline_core.
+
+
 ## ai_pipeline_core.settings
 
 Core configuration settings for pipeline operations.
@@ -1486,6 +1477,7 @@ OPENAI_API_KEY: API key for LiteLLM proxy authentication
 PREFECT_API_URL: Prefect server endpoint for flow orchestration
 PREFECT_API_KEY: Prefect API authentication key
 LMNR_PROJECT_API_KEY: Laminar project key for observability
+GCS_SERVICE_ACCOUNT_FILE: Path to GCS service account JSON file
 
 Configuration precedence:
 1. Environment variables (highest priority)
@@ -1514,6 +1506,7 @@ Configuration precedence:
   PREFECT_API_URL=http://localhost:4200/api
   PREFECT_API_KEY=pnu_abc123
   LMNR_PROJECT_API_KEY=lmnr_proj_xyz
+  GCS_SERVICE_ACCOUNT_FILE=/path/to/service-account.json
   APP_NAME=production-app
   DEBUG_MODE=false
 
@@ -1570,6 +1563,10 @@ Optional but recommended for production monitoring.
 
 lmnr_debug: Debug mode flag for Laminar. Set to "true" to
 enable debug-level logging. Empty string by default.
+
+gcs_service_account_file: Path to GCS service account JSON file.
+Used for authenticating with Google Cloud Storage.
+Optional - if not set, default credentials will be used.
 
 Configuration sources:
 - Environment variables (highest priority)
@@ -1657,7 +1654,7 @@ raise DocumentSizeError(...)  # NO! Already handled
 document.validate_file_name(document.name)  # NO! Automatic
 
 Best Practices:
-- Use create() classmethod for automatic type conversion (by default, unless instructed otherwise)
+- Use create() classmethod for automatic type conversion (default preferred)
 - Omit description parameter unless truly needed for metadata
 - When using LLM functions, pass AIMessages or str. Wrap any Document values
 in AIMessages([...]). Do not call .text yourself

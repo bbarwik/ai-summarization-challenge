@@ -13,7 +13,8 @@ TRACE_NAME = (__package__ or __name__).split(".")[0].replace("_", "-")
 
 def main():
     """Main CLI entry point."""
-    if len(sys.argv) == 1 and os.path.exists("workspace/input"):
+    args = [arg for arg in sys.argv[1:] if not arg.startswith("-")]
+    if len(args) == 0 and os.path.exists("workspace/input"):
         sys.argv.append("workspace")
     run_cli(
         flows=FLOWS,

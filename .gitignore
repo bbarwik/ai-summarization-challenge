@@ -163,4 +163,5 @@ output/
 .devcontainer/docker-compose.override.yml
 
 # Workspace
-!workspace/*
+workspace/
+!workspace/input/

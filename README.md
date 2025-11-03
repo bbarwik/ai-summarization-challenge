@@ -1,31 +1,81 @@
-# AI Summarization Pipeline — Recruitment Task
+# AI Summarization Challenge — Recruitment Task
 
 A practical challenge for candidates experienced with LLMs and prompt engineering.
-You’ll design an AI pipeline that converts **~200k tokens** of input documents into a **concise, detailed report** while keeping API **costs under $2** and **without preprocessing** (see definition below).
+You'll design an AI pipeline that analyzes **USDe stablecoin research documents** (~200k tokens) and produces a **structured confidence-based research report** while keeping API **costs under $1** and **without preprocessing** (see definition below).
 
 This repository includes a working but intentionally simple **4-step baseline**:
 **Planning → Writing → Review → Rewrite.**
-It runs end-to-end and demonstrates the mechanics, but it’s **not very efficient** and will often produce **duplicated** or **incorrect** information. Your goal is to propose and/or implement a **better approach** that yields a more faithful, compact report.
+It runs end-to-end and demonstrates the mechanics, but it's **not very efficient** and will often produce **duplicated**, **conflicting**, or **incorrect** information. Your goal is to propose and/or implement a **better approach** that yields a more accurate, well-structured report with proper confidence scoring.
+
+## Useful Resources
+
+These articles provide valuable insights for tackling long-context challenges:
+
+- **[Long Context Handling in LLMs](https://nrehiew.github.io/blog/long_context/)** - Discusses context rot, effective benchmarking, and the gap between advertised vs. actual context window capabilities. Key insight: models claiming 1M tokens often function effectively only within 32K-128K tokens.
+
+- **[Fiction.liveBench](https://fiction.live/stories/Fiction-liveBench-Feb-21-2025/oQdzQvKHw8JyXbN87)** - Benchmark for evaluating long-context performance.
 
 > Framework: This project uses **[ai-pipeline-core](https://github.com/bbarwik/ai-pipeline-core)** for async, typed, document-centric AI workflows.
 > Agents: Designed to work smoothly with **Claude Code** by default, but it should also work well with other AI coding agents.
 
-## What you’re solving
+## What you're solving
 
-In my main project we repeatedly need to **rewrite many long documents into a shorter one**
-(e.g., **~200k tokens → ~40k tokens**). Much of the input is **duplicated**, so compression is possible, but dealing with **very large contexts** is tricky. Two recurring problems must be addressed:
+This pipeline analyzes multiple research documents about **USDe stablecoin** and produces a structured final research report. The input documents contain overlapping information, conflicting claims, and varying levels of reliability. You need to consolidate this into a **confidence-scored analysis** that addresses several challenges:
 
-1. **Duplication & Coverage**
-   - The output should **remove redundancy** while **preserving all important information**.
-   - Even when content is repeated across files, the consolidated report should include it **once**, with sufficient detail.
+1. **Information Validation & Confidence Scoring**
+   - Classify findings by confidence level (HIGH, MEDIUM, LOW) based on source agreement
+   - HIGH: Multiple sources confirm without conflicts
+   - MEDIUM: Multiple sources with resolved conflicts
+   - LOW: Single source or unresolved conflicts
 
-2. **Fact Consistency & Temporal Accuracy**
-   - Models frequently **mix up facts** across sources.
-   - Newer documents should **override** older ones (e.g., a **2025** update supersedes a **2023** claim).
-   - The pipeline should **prefer the latest source** when conflicts arise and avoid stale statements.
+2. **Conflict Detection & Resolution**
+   - Identify where sources disagree
+   - Resolve conflicts when possible (e.g., using temporal ordering, source reliability)
+   - Explicitly document unresolved conflicts
 
-You **do not** need to fully solve these challenges here—it’s a hard problem that can take days.
-The aim is to **show that you understand the problem** and to present **credible ideas and techniques** to tackle it under the constraints.
+3. **Temporal Accuracy & Timeline Construction**
+   - Extract dates and build an accurate timeline of events
+   - Newer information should supersede older claims
+   - Assign confidence levels to each timeline entry
+
+4. **Information Quality Assessment**
+   - Flag potentially incorrect information with reasoning
+   - Identify critical data gaps requiring further research
+   - Avoid hallucination and unsupported claims
+
+You **do not** need to perfectly solve these challenges—it's complex work that can take days.
+The aim is to **show that you understand the problem** and to present **credible techniques** to tackle it under the $1 cost constraint.
+
+## Expected Output Structure
+
+The final report at `workspace/output/final_report.md` should contain:
+
+1. **Executive Summary** (200-500 words)
+   - Report goal, purpose, and key findings
+
+2. **Timeline**
+   - Chronological events using YYYY-MM-DD format
+   - Confidence level for each event (HIGH, MEDIUM, LOW)
+
+3. **High Confidence Findings**
+   - Information confirmed by multiple sources without conflicts
+
+4. **Medium Confidence Findings**
+   - Information from multiple sources with resolved conflicts
+
+5. **Low Confidence Findings**
+   - Information from single source or unresolved conflicts
+
+6. **Conflicting Information**
+   - All contradictions with resolutions (where possible)
+
+7. **Potentially Incorrect Information**
+   - Suspicious claims with explanations of why they may be wrong
+
+8. **Data Gaps and Missing Information**
+   - Critical gaps requiring further research
+
+The report must use **only** the provided USDe research documents without external knowledge or hallucination.
 
 ## Constraints (read carefully)
 
@@ -36,69 +86,49 @@ The aim is to **show that you understand the problem** and to present **credible
   - ✅ You **may** use **multi-step prompting**, message/content routing **within** the LLM calls, provider **caching** (where available), and structured outputs.
   - ✅ You **may** reorganize prompts/flows and use intermediate drafts/plans inside the pipeline—those are still **direct LLM transformations**.
 
-- **Cost cap:** keep **total LLM interactions under $2** for the full run on the supplied input set.
+- **Cost cap:** keep **total LLM interactions under $1** for the full run on the USDe research documents.
 - **Immutability of inputs:** you can refactor anything in the project **except** the files in `workspace/input/`.
-- **Output:** a **detailed, accurate** report at `workspace/output/final_report.md`, with **minimal duplication** and **correct, up-to-date facts**.
+- **Output:** a **detailed, accurate** report at `workspace/output/final_report.md`.
+
+> You can change anything you want except the `workspace/input` documents. The shipped solution is only a template to demonstrate a simple approach.
 
 ## Baseline provided (intentionally simple)
 
 The repo ships with a four-stage pipeline:
 
-1. **Planning** — draft a report outline from all inputs
-2. **Writing** — produce the first full draft following the plan
-3. **Review** — critique the draft and identify gaps/inaccuracies
-4. **Rewrite** — generate a polished final report incorporating the review
+1. **Planning** — analyzes documents, creates timeline, identifies conflicts
+2. **Writing** — produces first draft with confidence-based structure
+3. **Review** — verifies confidence levels and conflict resolution
+4. **Rewrite** — generates polished final report
 
 This works as a teaching scaffold but is **not optimized** for:
-- Large-context efficiency,
-- De-duplication,
-- Temporal conflict resolution,
-- Cost control under the **$2** cap.
+- Large-context efficiency
+- Confidence-based information validation
+- Conflict detection and resolution
+- Temporal accuracy and timeline construction
+- Cost control under the **$1** cap
 
 Your task is to **redesign prompts/flow/tasks** to improve these aspects while respecting **No preprocessing**.
 
-## Helper script
-
-There’s a handy script to snapshot the project tree:
-```bash
-scripts/list_all_files.sh > files.log
-```
-
-You can then **upload content of `files.log` to any AI model** (e.g., gpt-5) to help it navigate the repo.
-
-## Evaluation
-
-We’re looking for:
-
-* **Prompt & pipeline design** for large contexts (plans, selective conditioning, citation-style grounding within the allowed rules).
-* **De-duplication strategies** that preserve critical information while cutting redundancy.
-* **Temporal accuracy techniques** (e.g., encouraging date extraction, conflict detection, “newer wins” rules).
-* **Cost awareness**—staying under **\$2** with reasonable quality.
-* **Code clarity**—minimal, typed, async code that’s easy to reason about.
-
-> You can change anything you want except the `workspace/input` documents. The shipped solution is only a template to demonstrate a simple approach.
-
 ## 📁 Project Structure
-
-The project uses a 4-stage pipeline architecture:
 
 ```
 workspace/
-├── input/          # Source documents (~200k tokens)
-├── plan/           # Stage 1: Report structure planning
+├── input/          # USDe research documents (~200k tokens)
+├── plan/           # Stage 1: Analysis and planning
 ├── draft/          # Stage 2: Initial report draft
 ├── review/         # Stage 3: Quality review and feedback
 └── output/         # Stage 4: Final polished report
 
 ai_summarization/
 ├── flows/
-│   ├── step_01_planning/    # Creates report outline
-│   ├── step_02_writing/     # Writes initial draft
-│   ├── step_03_review/      # Reviews and provides feedback
-│   └── step_04_rewrite/     # Produces final report
+│   ├── step_01_planning/    # Document analysis and planning
+│   ├── step_02_writing/     # Initial draft generation
+│   ├── step_03_review/      # Quality verification
+│   └── step_04_rewrite/     # Final report production
 ├── documents/               # Document type definitions
 ├── prompts/                 # Shared prompt templates
-└── flow_options.py         # Task configuration
+└── flow_options.py         # Configuration
 ```
 
 ## 🚀 Quick Start
@@ -118,15 +148,7 @@ ai_summarization/
 
 ### Option 3: Local Setup
 ```bash
-# Clone repository
-git clone <repository-url>
-cd ai-summarization
-
-# Install dependencies
 pip install -e .
-
-# Or for development
-make install-dev
 ```
 
 ## Configuration
@@ -135,31 +157,17 @@ Create a `.env` file in the project root:
 
 ```bash
 # Required: OpenAI-compatible API endpoint
-# Recommended: Use OpenRouter for model variety
 OPENAI_BASE_URL=https://openrouter.ai/api/v1
 OPENAI_API_KEY=your-openrouter-api-key
 
 # Optional but recommended: LLM observability
-# Sign up free at https://laminar.sh/
 LMNR_PROJECT_API_KEY=your-laminar-key
 LMNR_DEBUG=false
-
-# Note: Prefect configuration is NOT needed in .env
 ```
 
-### Getting API Keys
-
-1. **OpenRouter** (https://openrouter.ai/):
-   - Sign up for free account
-   - Add credits ($5 minimum)
-   - Copy API key from dashboard
-   - Access to 100+ models including GPT-4, Claude, Gemini, etc.
-
-2. **Laminar** (https://laminar.sh/) - Optional but recommended:
-   - Sign up for free account
-   - Create new project
-   - Copy project API key
-   - Provides detailed LLM usage tracking and cost monitoring
+**Getting API Keys:**
+- **OpenRouter** (https://openrouter.ai/): Access to 100+ models including GPT-4, Claude, Gemini
+- **Laminar** (https://laminar.sh/): Optional - provides LLM usage tracking and cost monitoring
 
 ## 🏃 Running the Pipeline
 
@@ -171,7 +179,7 @@ python -m ai_summarization workspace/
 
 ### Partial Execution
 ```bash
-# Run specific stages (1-indexed)
+# Run specific stages (1-indexed, 1-4)
 python -m ai_summarization workspace/ --start 2 --end 3
 
 # Run only planning stage
@@ -181,9 +189,7 @@ python -m ai_summarization workspace/ --start 1 --end 1
 ### Model Selection
 ```bash
 # Use specific models (check OpenRouter for available models)
-python -m ai_summarization workspace/ \
-  --core-model "google/gemini-2.5-pro" \
-  --small-model "gpt-5-mini"
+python -m ai_summarization workspace/ --core-model "x-ai/grok-4-fast"
 ```
 
 ### Debug Mode
@@ -192,87 +198,31 @@ python -m ai_summarization workspace/ \
 LMNR_DEBUG=true python -m ai_summarization workspace/
 ```
 
-## Current Approach
-
-The pipeline implements a simple 4-stage approach:
-
-1. **Planning Stage** (`step_01_planning`)
-   - Analyzes all input documents
-   - Creates structured report outline
-   - Identifies key themes and companies
-   - Output: `workspace/plan/report_plan.md`
-
-2. **Writing Stage** (`step_02_writing`)
-   - Uses the plan to write initial draft
-   - Processes documents in context
-   - Generates comprehensive content
-   - Output: `workspace/draft/report_draft.md`
-
-3. **Review Stage** (`step_03_review`)
-   - Evaluates draft quality
-   - Identifies gaps and improvements
-   - Provides structured feedback
-   - Output: `workspace/review/report_review.md`
-
-4. **Rewrite Stage** (`step_04_rewrite`)
-   - Incorporates review feedback
-   - Polishes and refines content
-   - Produces final report
-   - Output: `workspace/output/final_report.md`
-
-## 🧪 Development
-
-### Testing
-```bash
-make test           # Run tests
-make test-cov      # Run with coverage
-```
-
-### Code Quality
-```bash
-make lint          # Run linting
-make format        # Auto-format code
-make typecheck     # Type checking
-```
-
-### Pre-commit Hooks
-```bash
-make install-dev   # Installs pre-commit hooks
-```
-
-## 📊 Task Details
-
-The pipeline processes research documents about AI assistant companies and generates a comprehensive report including:
-
-- **Company Introductions**: Detailed overview of each AI assistant project
-- **Project Status**: Current development stage and availability
-- **Timeline & Milestones**: Key achievements and historical context
-- **Future Plans**: Roadmap and upcoming features
-- **Comparative Analysis**: Strengths and weaknesses of each solution
-- **Market Positioning**: How projects compare to each other
-
-The report uses only the provided input documents without external knowledge, ensuring objectivity and accuracy based on the supplied research materials.
-
 ## 🎓 Evaluation Criteria
 
 Your solution will be evaluated on:
 
-1. **Prompt Engineering**: Quality and efficiency of prompts
-2. **Cost Efficiency**: Staying under $2 while maintaining quality
-3. **Output Quality**: Comprehensiveness and accuracy of the final report
-4. **Code Quality**: Clean, maintainable pipeline implementation
-5. **Innovation**: Creative approaches to the token/cost constraints
+1. **Prompt & Pipeline Design**
+   - Quality and efficiency of prompts for large contexts
+   - Effective confidence-based analysis approach
+   - Information validation strategies based on source agreement
 
-## 🤝 Support
+2. **Conflict Detection & Resolution**
+   - Techniques to identify and handle contradictory information
+   - Temporal accuracy (date extraction, timeline construction, "newer wins" rules)
 
-- **Framework Documentation**: See `dependencies_docs/ai-pipeline-core.md`
-- **Development Guide**: See `DEVELOPMENT.md` for detailed patterns
-- **Claude Integration**: See `CLAUDE.md` for AI assistant guidelines
+3. **Cost Efficiency**
+   - Staying under **$1** while maintaining quality
+   - Creative approaches to the token/cost constraints
+
+4. **Output Quality**
+   - Comprehensiveness and accuracy of the final report
+   - Proper confidence level assignments
+   - Minimal duplication and correct facts
 
 ## 📌 Important Notes
 
 - The project is designed to work out-of-the-box with DevContainers or Codespaces
-- All you need is to configure the `.env` file with your API keys
 - The pipeline is fully async for optimal performance
-- Prefect orchestration is built-in but requires no configuration
+- Framework documentation is available in `dependencies_docs/ai-pipeline-core.md`
 - The `--start` and `--end` indices are 1-based (1-4 for the 4 flows)

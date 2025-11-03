@@ -4,6 +4,7 @@ from ai_pipeline_core import (
     AIMessages,
     DocumentList,
     ModelName,
+    ModelOptions,
     PromptManager,
     get_pipeline_logger,
     llm,
@@ -28,12 +29,10 @@ async def rewrite_report(
     draft_document: DraftDocument,
     review_document: ReviewDocument,
     model: ModelName,
-    task_description: str,
 ) -> OutputDocument:
     """Rewrite the report incorporating review feedback."""
     prompt = prompt_manager.get(
         "rewrite_report",
-        task_description=task_description,
     )
 
     # Static context with input documents for caching
@@ -46,6 +45,9 @@ async def rewrite_report(
         model=model,
         context=context,
         messages=messages,
+        options=ModelOptions(
+            reasoning_effort="high",
+        ),
     )
 
     return OutputDocument.create(

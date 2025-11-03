@@ -1,6 +1,6 @@
 [project]
 name = "ai-summarization"
-version = "0.1.0"
+version = "0.2.0"
 description = "AI-powered project built with ai-pipeline-core framework"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -19,7 +19,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
-    "ai-pipeline-core>=0.2.0",
+    "ai-pipeline-core>=0.2.8",
     "pydantic>=2.11.7",
 ]
 
@@ -27,9 +27,9 @@ dependencies = [
 ai-summarization = "ai_summarization.__main__:main"
 
 [project.urls]
-Homepage = "https://github.com/bbarwik/ai-summarization"
-Repository = "https://github.com/bbarwik/ai-summarization"
-Issues = "https://github.com/bbarwik/ai-summarization/issues"
+Homepage = "https://github.com/bbarwik/ai-summarization-challenge"
+Repository = "https://github.com/bbarwik/ai-summarization-challenge"
+Issues = "https://github.com/bbarwik/ai-summarization-challenge/issues"
 
 [project.optional-dependencies]
 dev = [
@@ -134,7 +134,7 @@ reportIncompatibleVariableOverride = "error"
 reportMissingParameterType = "warning"
 
 [tool.bumpversion]
-current_version = "0.1.0"
+current_version = "0.2.0"
 commit = true
 tag = true
 tag_name = "v{new_version}"

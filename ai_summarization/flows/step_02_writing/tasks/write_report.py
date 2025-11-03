@@ -4,6 +4,7 @@ from ai_pipeline_core import (
     AIMessages,
     DocumentList,
     ModelName,
+    ModelOptions,
     PromptManager,
     get_pipeline_logger,
     llm,
@@ -21,12 +22,10 @@ async def write_report(
     input_documents: DocumentList,
     plan_document: PlanDocument,
     model: ModelName,
-    task_description: str,
 ) -> DraftDocument:
     """Write the initial report following the plan."""
     prompt = prompt_manager.get(
         "write_report",
-        task_description=task_description,
     )
 
     # Static context with input documents for caching
@@ -39,6 +38,9 @@ async def write_report(
         model=model,
         context=context,
         messages=messages,
+        options=ModelOptions(
+            reasoning_effort="high",
+        ),
     )
 
     return DraftDocument.create(

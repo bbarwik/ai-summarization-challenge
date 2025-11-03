@@ -31,8 +31,7 @@ async def writing_flow(
         input_documents=input_docs,
         plan_document=plan_doc,
         model=flow_options.core_model,
-        task_description=flow_options.task_description,
     )
 
     # Return validated output
-    return WritingFlowConfig.create_and_validate_output([draft_doc])
+    return WritingFlowConfig.create_and_validate_output(draft_doc)

@@ -4,6 +4,7 @@ from ai_pipeline_core import (
     AIMessages,
     DocumentList,
     ModelName,
+    ModelOptions,
     PromptManager,
     get_pipeline_logger,
     llm,
@@ -18,18 +19,16 @@ logger = get_pipeline_logger(__name__)
 
 @pipeline_task
 async def plan_report(
-    documents: DocumentList,
+    input_documents: DocumentList,
     model: ModelName,
-    task_description: str,
 ) -> PlanDocument:
     """Create a detailed plan for the report based on input documents."""
     prompt = prompt_manager.get(
         "plan_report",
-        task_description=task_description,
     )
 
     # Static context with input documents for caching
-    context = AIMessages(documents)
+    context = AIMessages(input_documents)
 
     # Dynamic message with the prompt
     messages = AIMessages([prompt])
@@ -38,6 +37,9 @@ async def plan_report(
         model=model,
         context=context,
         messages=messages,
+        options=ModelOptions(
+            reasoning_effort="high",
+        ),
     )
 
     return PlanDocument.create(

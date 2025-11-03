@@ -27,10 +27,9 @@ async def planning_flow(
 
     # Create the plan
     plan_doc = await plan_report(
-        documents=input_docs,
+        input_documents=input_docs,
         model=flow_options.core_model,
-        task_description=flow_options.task_description,
     )
 
     # Return validated output
-    return PlanningFlowConfig.create_and_validate_output([plan_doc])
+    return PlanningFlowConfig.create_and_validate_output(plan_doc)

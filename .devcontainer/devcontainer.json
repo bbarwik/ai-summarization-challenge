@@ -7,7 +7,8 @@
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/ai-summarization,type=bind,consistency=cached",
     "features": {
         "ghcr.io/anthropics/devcontainer-features/claude-code:latest": {},
-        "ghcr.io/devcontainers/features/github-cli:1": {}
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/jsburckhardt/devcontainer-features/codex:1": {}
     },
     "overrideCommand": true,
     "containerEnv": {

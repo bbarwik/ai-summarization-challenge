@@ -4,6 +4,7 @@ from ai_pipeline_core import (
     AIMessages,
     DocumentList,
     ModelName,
+    ModelOptions,
     PromptManager,
     get_pipeline_logger,
     llm,
@@ -22,12 +23,10 @@ async def review_report(
     plan_document: PlanDocument,
     draft_document: DraftDocument,
     model: ModelName,
-    task_description: str,
 ) -> ReviewDocument:
     """Review the draft report and provide improvement suggestions."""
     prompt = prompt_manager.get(
         "review_report",
-        task_description=task_description,
     )
 
     # Static context with input documents for caching
@@ -40,6 +39,9 @@ async def review_report(
         model=model,
         context=context,
         messages=messages,
+        options=ModelOptions(
+            reasoning_effort="high",
+        ),
     )
 
     return ReviewDocument.create(

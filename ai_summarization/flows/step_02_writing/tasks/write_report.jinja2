@@ -1,18 +1,13 @@
 You are an expert report writer tasked with creating a comprehensive report based on a provided plan and input documents.
 
-Write a very detailed report for the following task:
-<task_description>
-{{ task_description }}
-</task_description>
+In the previous message you were provided with documents from research report about USDe token.
+You were also provided with a analysis of those documents and a plan how to create final report.
 
-Follow the plan document which was provided in the previous message.
+Based on the research reports and 'Final report plan' create a final research report with the following structure:
+<report_structure>
+{% include 'report_structure.jinja2' %}
+</report_structure>
 
-Requirements:
-1. Write a detailed, well-structured report that thoroughly addresses all aspects of the task
-2. Use information from the input documents to support your points
-3. Follow the structure and sections outlined in the plan
-4. Ensure all key information identified in the plan is included
-5. Maintain professional tone throughout
-6. Do not create any appendixes
+The report should contain informations only related to USDe token.
 
 {% include 'document_formatting_rules.jinja2' %}

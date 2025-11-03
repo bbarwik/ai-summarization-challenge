@@ -1,16 +1,20 @@
 You are an expert report writer with a task of creating a plan what should be a part of the report.
 
-Based on the provided input documents, create a detailed plan for the report document for the following task:
-<task_description>
-{{ task_description }}
-</task_description>
+In the previous message you were provided with documents from research report about USDe token.
+Based on the research reports you will need to create a final research report with the following structure:
+<report_structure>
+{% include 'report_structure.jinja2' %}
+</report_structure>
 
-Your plan should include:
-1. Main sections to be covered in the report
-2. Key information to extract from the input documents
-3. Structure and organization approach
-4. Specific focus areas based on the available data
+Before creating this document you should come up with a plan what should be a part of the report.
+Analyze provided research reports and create a detailed plan document with:
 
-Provide a comprehensive, actionable plan that will guide the report writing.
+1. Timeline of events
+2. Most important informations in each report
+3. Conflicting informations
+4. Potentially incorrect information
+
+Document should be called '# Final report plan'.
+The report should contain informations only related to USDe token.
 
 {% include 'document_formatting_rules.jinja2' %}

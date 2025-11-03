@@ -264,6 +264,19 @@ This is the main property you'll use with ModelResponse.
   >>> if "error" in response.content.lower():
   ...     # Handle error case
 
+#### ModelResponse.reasoning_content
+
+```python
+@property
+def reasoning_content(self) -> str
+```
+
+Get the reasoning content.
+
+**Returns**:
+
+  The reasoning content from the model, or empty string if none.
+
 ### StructuredModelResponse
 
 ```python
@@ -272,83 +285,7 @@ class StructuredModelResponse(ModelResponse, Generic[T])
 
 Response wrapper for structured/typed LLM output.
 
-Primary usage is adding to AIMessages and accessing .parsed property:
-
->>> class Analysis(BaseModel):
-...     sentiment: float
-...     summary: str
->>>
->>> response = await generate_structured(
-...     "gpt-5",
-...     response_format=Analysis,
-...     messages="Analyze this text..."
-... )
->>>
->>> # Primary usage: access parsed model
->>> analysis = response.parsed
->>> print(f"Sentiment: {analysis.sentiment}")
->>>
->>> # Can add to messages for conversation
->>> messages.append(response)
-
-The two main interactions:
-1. Accessing .parsed property for the structured data
-2. Adding to AIMessages for conversation continuity
-
-These patterns cover virtually all use cases. Advanced features exist
-but should only be used when absolutely necessary.
-
-Type Parameter:
-T: The Pydantic model type for the structured output.
-
-**Notes**:
-
-  Extends ModelResponse with type-safe parsed data access.
-  Other inherited properties should rarely be needed.
-
-#### StructuredModelResponse.parsed
-
-```python
-@property
-def parsed(self) -> T
-```
-
-Get the parsed Pydantic model instance.
-
-Primary property for accessing structured output.
-This is the main reason to use generate_structured().
-
-**Returns**:
-
-  Validated instance of the Pydantic model type T.
-
-**Raises**:
-
-- `ValueError` - If no parsed content available (internal error).
-
-**Example**:
-
-  >>> class UserInfo(BaseModel):
-  ...     name: str
-  ...     age: int
-  >>>
-  >>> response = await generate_structured(
-  ...     "gpt-5",
-  ...     response_format=UserInfo,
-  ...     messages="Extract user info..."
-  ... )
-  >>>
-  >>> # Primary usage: get the parsed model
-  >>> user = response.parsed
-  >>> print(f"{user.name} is {user.age} years old")
-  >>>
-  >>> # Can also add to messages
-  >>> messages.append(response)
-
-**Notes**:
-
-  Type-safe with full IDE support. This is the main property
-  you'll use with structured responses.
+Primary usage is accessing the .parsed property for the structured data.
 
 
 ## ai_pipeline_core.llm.ai_messages
@@ -406,8 +343,8 @@ of Documents, build AIMessages first (e.g., `AIMessages([doc])` or `AIMessages(d
 CAUTION: AIMessages is a list subclass. Always use list construction (e.g.,
 `AIMessages(["text"])`) or empty constructor with append (e.g.,
 `AIMessages(); messages.append("text")`). Never pass raw strings directly to the
-constructor (`AIMessages("text")`) as this will iterate over the string characters
-instead of treating it as a single message.
+constructor (`AIMessages("text")`) as this will raise a TypeError to prevent
+accidental character iteration.
 
 **Example**:
 
@@ -416,6 +353,31 @@ instead of treating it as a single message.
   >>> messages.append("What is the capital of France?")
   >>> response = await llm.generate("gpt-5", messages=messages)
   >>> messages.append(response)  # Add the actual response
+
+#### AIMessages.approximate_tokens_count
+
+```python
+@property
+def approximate_tokens_count(self) -> int
+```
+
+Approximate tokens count for the messages.
+
+Uses tiktoken with gpt-4 encoding to estimate total token count
+across all messages in the conversation.
+
+**Returns**:
+
+  Approximate tokens count for all messages.
+
+**Raises**:
+
+- `ValueError` - If message contains unsupported type.
+
+**Example**:
+
+  >>> messages = AIMessages(["Hello", "World"])
+  >>> messages.approximate_tokens_count  # ~2-3 tokens
 
 
 ## ai_pipeline_core.llm.model_types
@@ -432,12 +394,12 @@ ModelName: TypeAlias = (
         # Small models
         "gemini-2.5-flash",
         "gpt-5-mini",
-        "grok-3-mini",
+        "grok-4-fast",
         # Search models
         "gemini-2.5-flash-search",
         "sonar-pro-search",
         "gpt-4o-search",
-        "grok-3-mini-search",
+        "grok-4-fast-search",
     ]
     | str
 )
@@ -458,7 +420,7 @@ Core models (gemini-2.5-pro, gpt-5, grok-4):
 High-capability models for complex tasks requiring deep reasoning,
 nuanced understanding, or creative generation.
 
-Small models (gemini-2.5-flash, gpt-5-mini, grok-3-mini):
+Small models (gemini-2.5-flash, gpt-5-mini, grok-4-fast):
 Efficient models optimized for speed and cost, suitable for
 simpler tasks or high-volume processing.
 
@@ -529,7 +491,7 @@ Best Practices:
 - `model` - Model to use (e.g., "gpt-5", "gemini-2.5-pro", "grok-4").
   Accepts predefined models or any string for custom models.
 - `context` - Static context to cache (documents, examples, instructions).
-  Defaults to None (empty context). Cached for 120 seconds.
+  Defaults to None (empty context). Cached for 5 minutes by default.
 - `messages` - Dynamic messages/queries. AIMessages or str ONLY.
   Do not pass Document or DocumentList directly.
   If string, converted to AIMessages internally.
@@ -606,32 +568,17 @@ Best Practices:
   ... ])
   >>> response = await llm.generate("gpt-5", messages=messages)
 
-  Configuration via LiteLLM Proxy:
-  >>> # Configure temperature in litellm_config.yaml:
-  >>> # model_list:
-  >>> #   - model_name: gpt-5
-  >>> #     litellm_params:
-  >>> #       model: openai/gpt-4o
-  >>> #       temperature: 0.3
-  >>> #       max_tokens: 1000
-  >>>
-  >>> # Configure retry logic in proxy:
-  >>> # general_settings:
-  >>> #   master_key: sk-1234
-  >>> #   max_retries: 5
-  >>> #   retry_delay: 15
-
   Performance:
   - Context caching saves ~50-90% tokens on repeated calls
   - First call: full token cost
   - Subsequent calls (within cache TTL): only messages tokens
-  - Default cache TTL is 120s (production-optimized)
+  - Default cache TTL is 300s/5 minutes (production-optimized)
   - Default retry logic: 3 attempts with 10s delay (production-optimized)
 
   Caching:
   When enabled in your LiteLLM proxy and supported by the upstream provider,
   context messages may be cached to reduce token usage on repeated calls.
-  Default TTL is 120s (optimized for production workloads). Configure caching
+  Default TTL is 5m (optimized for production workloads). Configure caching
   behavior centrally via your LiteLLM proxy settings, not per API call.
   Savings depend on provider and payload; treat this as an optimization, not a guarantee.
 
@@ -714,13 +661,15 @@ directly into structured format:
   Defaults to None (empty AIMessages).
 - `messages` - Dynamic prompts/queries. AIMessages or str ONLY.
   Do not pass Document or DocumentList directly.
-- `options` - DEPRECATED - DO NOT USE. Reserved for internal framework usage only.
-  Framework defaults are production-optimized. Configure model behavior
-  centrally via LiteLLM proxy settings, not per API call.
-  The response_format is set automatically from the response_format parameter.
+- `options` - Optional ModelOptions for configuring temperature, retries, etc.
+  If provided, it will NOT be mutated (a copy is created internally).
+  The response_format field is set automatically from the response_format parameter.
+  In most cases, leave as None to use framework defaults.
+  Configure model behavior centrally via LiteLLM proxy settings when possible.
 
-  VISION/PDF MODEL COMPATIBILITY:
-  When using Documents with images/PDFs in structured output:
+**Notes**:
+
+  Vision/PDF model compatibility considerations:
   - Images require vision-capable models that also support structured output
   - PDFs require models with both document processing AND structured output support
   - Many models support either vision OR structured output, but not both
@@ -806,6 +755,8 @@ Key features:
 - Jinja2 template rendering with context
 - Smart path resolution (.jinja2/.jinja extension handling)
 - Clear error messages for missing templates
+- Built-in global variables:
+- current_date: Current date in format "03 January 2025" (string)
 
 **Example**:
 
@@ -885,6 +836,8 @@ package boundary or after 4 parent levels, whichever comes first)
     {% if instructions %}
     Instructions: {{ instructions }}
     {% endif %}
+
+    Date: {{ current_date }}  # Current date in format "03 January 2025"
     ```
 
 **Notes**:
@@ -1207,7 +1160,7 @@ and enforce async-only execution for consistency.
 ### pipeline_task
 
 ```python
-def pipeline_task(__fn: Callable[..., Coroutine[Any, Any, R_co]] | None = None, *, trace_level: TraceLevel = "always", trace_ignore_input: bool = False, trace_ignore_output: bool = False, trace_ignore_inputs: list[str] | None = None, trace_input_formatter: Callable[..., str] | None = None, trace_output_formatter: Callable[..., str] | None = None, trace_cost: float | None = None, name: str | None = None, description: str | None = None, tags: Iterable[str] | None = None, version: str | None = None, cache_policy: CachePolicy | type[NotSet] = NotSet, cache_key_fn: Callable[[TaskRunContext, dict[str, Any]], str | None] | None = None, cache_expiration: datetime.timedelta | None = None, task_run_name: TaskRunNameValueOrCallable | None = None, retries: int | None = None, retry_delay_seconds: int | float | list[float] | Callable[[int], list[float]] | None = None, retry_jitter_factor: float | None = None, persist_result: bool | None = None, result_storage: ResultStorage | str | None = None, result_serializer: ResultSerializer | str | None = None, result_storage_key: str | None = None, cache_result_in_memory: bool = True, timeout_seconds: int | float | None = None, log_prints: bool | None = False, refresh_cache: bool | None = None, on_completion: list[StateHookCallable] | None = None, on_failure: list[StateHookCallable] | None = None, retry_condition_fn: RetryConditionCallable | None = None, viz_return_value: bool | None = None, asset_deps: list[str | Asset] | None = None) -> _TaskLike[R_co] | Callable[[Callable[..., Coroutine[Any, Any, R_co]]], _TaskLike[R_co]]
+def pipeline_task(__fn: Callable[..., Coroutine[Any, Any, R_co]] | None = None, *, trace_level: TraceLevel = "always", trace_ignore_input: bool = False, trace_ignore_output: bool = False, trace_ignore_inputs: list[str] | None = None, trace_input_formatter: Callable[..., str] | None = None, trace_output_formatter: Callable[..., str] | None = None, trace_cost: float | None = None, trace_trim_documents: bool = True, name: str | None = None, description: str | None = None, tags: Iterable[str] | None = None, version: str | None = None, cache_policy: CachePolicy | type[NotSet] = NotSet, cache_key_fn: Callable[[TaskRunContext, dict[str, Any]], str | None] | None = None, cache_expiration: datetime.timedelta | None = None, task_run_name: TaskRunNameValueOrCallable | None = None, retries: int | None = None, retry_delay_seconds: int | float | list[float] | Callable[[int], list[float]] | None = None, retry_jitter_factor: float | None = None, persist_result: bool | None = None, result_storage: ResultStorage | str | None = None, result_serializer: ResultSerializer | str | None = None, result_storage_key: str | None = None, cache_result_in_memory: bool = True, timeout_seconds: int | float | None = None, log_prints: bool | None = False, refresh_cache: bool | None = None, on_completion: list[StateHookCallable] | None = None, on_failure: list[StateHookCallable] | None = None, retry_condition_fn: RetryConditionCallable | None = None, viz_return_value: bool | None = None, asset_deps: list[str | Asset] | None = None) -> _TaskLike[R_co] | Callable[[Callable[..., Coroutine[Any, Any, R_co]]], _TaskLike[R_co]]
 ```
 
 Decorate an async function as a traced Prefect task.
@@ -1225,8 +1178,6 @@ Only specify parameters when you have EXPLICIT requirements.
 **Arguments**:
 
 - `__fn` - Function to decorate (when used without parentheses).
-
-  Tracing parameters:
 - `trace_level` - When to trace ("always", "debug", "off").
   - "always": Always trace (default)
   - "debug": Only trace when LMNR_DEBUG="true"
@@ -1239,8 +1190,8 @@ Only specify parameters when you have EXPLICIT requirements.
 - `trace_cost` - Optional cost value to track in metadata. When provided and > 0,
   sets gen_ai.usage.output_cost, gen_ai.usage.cost, and cost metadata.
   Also forces trace level to "always" if not already set.
-
-  Prefect task parameters:
+- `trace_trim_documents` - Trim document content in traces to first 100 chars (default True).
+  Reduces trace size with large documents.
 - `name` - Task name (defaults to function name).
 - `description` - Human-readable task description.
 - `tags` - Tags for organization and filtering.
@@ -1310,7 +1261,7 @@ Only specify parameters when you have EXPLICIT requirements.
 ### pipeline_flow
 
 ```python
-def pipeline_flow(*, config: type[FlowConfig], trace_level: TraceLevel = "always", trace_ignore_input: bool = False, trace_ignore_output: bool = False, trace_ignore_inputs: list[str] | None = None, trace_input_formatter: Callable[..., str] | None = None, trace_output_formatter: Callable[..., str] | None = None, trace_cost: float | None = None, name: str | None = None, version: str | None = None, flow_run_name: Union[Callable[[], str], str] | None = None, retries: int | None = None, retry_delay_seconds: int | float | None = None, task_runner: TaskRunner[PrefectFuture[Any]] | None = None, description: str | None = None, timeout_seconds: int | float | None = None, validate_parameters: bool = True, persist_result: bool | None = None, result_storage: ResultStorage | str | None = None, result_serializer: ResultSerializer | str | None = None, cache_result_in_memory: bool = True, log_prints: bool | None = None, on_completion: list[FlowStateHook[Any, Any]] | None = None, on_failure: list[FlowStateHook[Any, Any]] | None = None, on_cancellation: list[FlowStateHook[Any, Any]] | None = None, on_crashed: list[FlowStateHook[Any, Any]] | None = None, on_running: list[FlowStateHook[Any, Any]] | None = None) -> Callable[[_DocumentsFlowCallable[FO_contra]], _FlowLike[FO_contra]]
+def pipeline_flow(*, config: type[FlowConfig], trace_level: TraceLevel = "always", trace_ignore_input: bool = False, trace_ignore_output: bool = False, trace_ignore_inputs: list[str] | None = None, trace_input_formatter: Callable[..., str] | None = None, trace_output_formatter: Callable[..., str] | None = None, trace_cost: float | None = None, trace_trim_documents: bool = True, name: str | None = None, version: str | None = None, flow_run_name: Union[Callable[[], str], str] | None = None, retries: int | None = None, retry_delay_seconds: int | float | None = None, task_runner: TaskRunner[PrefectFuture[Any]] | None = None, description: str | None = None, timeout_seconds: int | float | None = None, validate_parameters: bool = True, persist_result: bool | None = None, result_storage: ResultStorage | str | None = None, result_serializer: ResultSerializer | str | None = None, cache_result_in_memory: bool = True, log_prints: bool | None = None, on_completion: list[FlowStateHook[Any, Any]] | None = None, on_failure: list[FlowStateHook[Any, Any]] | None = None, on_cancellation: list[FlowStateHook[Any, Any]] | None = None, on_crashed: list[FlowStateHook[Any, Any]] | None = None, on_running: list[FlowStateHook[Any, Any]] | None = None) -> Callable[[_DocumentsFlowCallable[FO_contra]], _FlowLike[FO_contra]]
 ```
 
 Decorate an async flow for document processing.
@@ -1334,13 +1285,8 @@ flow_options: FlowOptions, # Configuration (or subclass)
 
 **Arguments**:
 
-- `__fn` - Function to decorate (when used without parentheses).
-
-  Config parameter:
 - `config` - Required FlowConfig class for document loading/saving. Enables
   automatic loading from string paths and saving outputs.
-
-  Tracing parameters:
 - `trace_level` - When to trace ("always", "debug", "off").
   - "always": Always trace (default)
   - "debug": Only trace when LMNR_DEBUG="true"
@@ -1353,8 +1299,8 @@ flow_options: FlowOptions, # Configuration (or subclass)
 - `trace_cost` - Optional cost value to track in metadata. When provided and > 0,
   sets gen_ai.usage.output_cost, gen_ai.usage.cost, and cost metadata.
   Also forces trace level to "always" if not already set.
-
-  Prefect flow parameters:
+- `trace_trim_documents` - Trim document content in traces to first 100 chars (default True).
+  Reduces trace size with large documents.
 - `name` - Flow name (defaults to function name).
 - `version` - Flow version identifier.
 - `flow_run_name` - Static or dynamic run name.
@@ -1678,6 +1624,8 @@ Key features:
 - Support for text, JSON, YAML, PDF, and image formats
 - Conversion utilities between different formats
 - Source provenance tracking via sources field
+- Document type conversion via model_convert() method
+- Standard Pydantic model_copy() for same-type copying
 
 Class Variables:
 MAX_CONTENT_SIZE: Maximum allowed content size in bytes (default 25MB)
@@ -1807,6 +1755,14 @@ MAX_CONTENT_SIZE: Maximum allowed content size in bytes (default 25MB)
   ...     sources=[source_doc.sha256]  # Reference source document
   ... )
   >>> processed.has_source(source_doc)  # True
+  >>>
+  >>> # Document copying and type conversion:
+  >>> # Standard Pydantic model_copy (doesn't validate updates)
+  >>> copied = doc.model_copy(update={"name": "new_name.json"})
+  >>> # Type conversion with validation via model_convert
+  >>> task_doc = MyTaskDoc.create(name="temp.json", content={"data": "value"})
+  >>> flow_doc = task_doc.model_convert(MyFlowDoc)  # Convert to FlowDocument
+  >>> flow_doc.is_flow  # True
 
 #### Document.MAX_CONTENT_SIZE
 
@@ -1820,7 +1776,7 @@ Maximum allowed content size in bytes (default 25MB).
 
 ```python
 @classmethod
-def create(cls, *, name: str, content: str | bytes | dict[str, Any] | list[Any] | BaseModel, description: str | None = None, sources: list[str] = []) -> Self
+def create(cls, *, name: str, content: str | bytes | dict[str, Any] | list[Any] | BaseModel, description: str | None = None, sources: list[str] | None = None) -> Self
 ```
 
 Create a Document with automatic content type conversion (recommended).
@@ -1919,7 +1875,7 @@ Only provide name and content. The description parameter is RARELY needed.
 #### Document.__init__
 
 ```python
-def __init__(self, *, name: str, content: bytes, description: str | None = None, sources: list[str] = []) -> None
+def __init__(self, *, name: str, content: bytes, description: str | None = None, sources: list[str] | None = None) -> None
 ```
 
 Initialize a Document instance with raw bytes content.
@@ -2148,6 +2104,28 @@ text-based documents (check is_text property first).
   >>> binary_doc = MyDocument(name="image.png", content=png_bytes)
   >>> binary_doc.text  # Raises ValueError
 
+#### Document.approximate_tokens_count
+
+```python
+@property
+def approximate_tokens_count(self) -> int
+```
+
+Approximate tokens count for the document content.
+
+Uses tiktoken with gpt-4 encoding to estimate token count.
+For text documents, encodes the actual text. For non-text
+documents (images, PDFs, etc.), returns a fixed estimate of 1024 tokens.
+
+**Returns**:
+
+  Approximate number of tokens for this document.
+
+**Example**:
+
+  >>> doc = MyDocument.create(name="data.txt", content="Hello world")
+  >>> doc.approximate_tokens_count  # ~2 tokens
+
 #### Document.as_pydantic_model
 
 ```python
@@ -2287,6 +2265,60 @@ Designed for roundtrip conversion:
   >>> doc.parse(list)
   ['Item 1', 'Item 2']
 
+#### Document.model_convert
+
+```python
+@final
+def model_convert(self, new_type: type[TDocument], *, update: dict[str, Any] | None = None, deep: bool = False) -> TDocument
+```
+
+Convert document to a different Document type with optional updates.
+
+Creates a new document of a different type, preserving all attributes
+while allowing updates. This is useful for converting between document
+types (e.g., TaskDocument to FlowDocument) while maintaining data integrity.
+
+**Arguments**:
+
+- `new_type` - Target Document class for conversion. Must be a concrete
+  subclass of Document (not abstract classes like Document,
+  FlowDocument, or TaskDocument).
+- `update` - Dictionary of attributes to update. Supports any attributes
+  that the Document constructor accepts (name, content,
+  description, sources).
+- `deep` - Whether to perform a deep copy of mutable attributes.
+
+**Returns**:
+
+  New Document instance of the specified type.
+
+**Raises**:
+
+- `TypeError` - If new_type is not a subclass of Document, is an abstract
+  class, or if update contains invalid attributes.
+- `DocumentNameError` - If the name violates the target type's FILES enum.
+- `DocumentSizeError` - If content exceeds MAX_CONTENT_SIZE.
+
+**Example**:
+
+  >>> # Convert TaskDocument to FlowDocument
+  >>> task_doc = MyTaskDoc.create(name="temp.json", content={"data": "value"})
+  >>> flow_doc = task_doc.model_convert(MyFlowDoc)
+  >>> assert flow_doc.is_flow
+  >>> assert flow_doc.content == task_doc.content
+  >>>
+  >>> # Convert with updates
+  >>> updated = task_doc.model_convert(
+  ...     MyFlowDoc,
+  ...     update={"name": "permanent.json", "description": "Converted"}
+  ... )
+  >>>
+  >>> # Track document lineage
+  >>> derived = doc.model_convert(
+  ...     ProcessedDoc,
+  ...     update={"sources": [doc.sha256]}
+  ... )
+
 
 ## ai_pipeline_core.documents
 
@@ -2369,7 +2401,7 @@ Only enable validate_same_type or validate_duplicates when you explicitly need t
 #### DocumentList.__init__
 
 ```python
-def __init__(self, documents: list[Document] | None = None, validate_same_type: bool = False, validate_duplicates: bool = False) -> None
+def __init__(self, documents: list[Document] | None = None, validate_same_type: bool = False, validate_duplicates: bool = False, frozen: bool = False) -> None
 ```
 
 Initialize DocumentList.
@@ -2379,6 +2411,7 @@ Initialize DocumentList.
 - `documents` - Initial list of documents.
 - `validate_same_type` - Enforce same document type.
 - `validate_duplicates` - Prevent duplicate filenames.
+- `frozen` - If True, list is immutable from creation.
 
 #### DocumentList.filter_by
 

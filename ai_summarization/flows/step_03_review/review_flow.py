@@ -38,8 +38,7 @@ async def review_flow(
         plan_document=plan_doc,
         draft_document=draft_doc,
         model=flow_options.core_model,
-        task_description=flow_options.task_description,
     )
 
     # Return validated output
-    return ReviewFlowConfig.create_and_validate_output([review_doc])
+    return ReviewFlowConfig.create_and_validate_output(review_doc)

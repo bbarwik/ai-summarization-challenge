@@ -41,8 +41,7 @@ async def rewrite_flow(
         draft_document=draft_doc,
         review_document=review_doc,
         model=flow_options.core_model,
-        task_description=flow_options.task_description,
     )
 
     # Return validated output
-    return RewriteFlowConfig.create_and_validate_output([output_doc])
+    return RewriteFlowConfig.create_and_validate_output(output_doc)

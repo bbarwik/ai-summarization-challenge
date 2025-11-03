@@ -46,6 +46,21 @@ This pipeline analyzes multiple research documents about **USDe stablecoin** and
 You **do not** need to perfectly solve these challenges—it's complex work that can take days.
 The aim is to **show that you understand the problem** and to present **credible techniques** to tackle it under the $1 cost constraint.
 
+## Input Documents Contain Intentional Errors
+
+**IMPORTANT:** The research documents in `workspace/input/` intentionally contain **~160 pieces of obviously incorrect information** designed to test your pipeline's detection capabilities. These include:
+
+- **Impossible dates** (e.g., 2025-02-30, 2024-13-45, events in the future)
+- **Mathematical impossibilities** (negative TVL, >100% percentages, impossible statistics)
+- **Logical contradictions** (directly conflicting statements)
+- **Zero-credibility sources** (anonymous social media posts, fake organizations, defunct websites)
+- **Absurd technical claims** (time travel, quantum impossibilities, physically impossible events)
+- **Timeline violations** (events occurring before their causes, pre-launch activities)
+
+Your solution should identify these errors and categorize them appropriately in the **"Potentially Incorrect Information"** and **"Conflicting Information"** sections of your report.
+
+A complete list of all intentionally added incorrect information is available in `docs/incorrect_informations.md` for reference during evaluation.
+
 ## Expected Output Structure
 
 The final report at `workspace/output/final_report.md` should contain:

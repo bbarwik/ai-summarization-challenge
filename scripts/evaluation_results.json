@@ -1,0 +1,2618 @@
+{
+  "results": [
+    {
+      "error_id": "1a",
+      "claim": "Protocol founded by Satoshi Nakamoto in 2026 using time-travel technology",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Low Confidence Findings explicitly cites \u201cfounded by Satoshi Nakamoto in 2026 using time-travel technology\u201d as a non-credible claim; flags time travel and impossible dates.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Flags time-travel blockchain as physically impossible and lists fabricated citations; groups such claims under Impossible Dates & Absurd Claims.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "1b",
+      "claim": "Market cap exceeded $850 trillion on 2025-02-30",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags impossible dates and absurd market caps in the hundreds of trillions as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible Dates table includes 2025-02-30 $850T market cap; labeled low confidence/absurd.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "1c",
+      "claim": "478% collateralization ratio on 2024-15-92",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags impossible dates and other overcollateralization contradictions but not this exact figure.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Lists such impossible percentages (e.g., 478%) under Mathematical Impossibilities; explains >100% without external capital.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "1d",
+      "claim": "73% backing consists of rare Pepe NFTs and Dogecoin",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "General dismissal of absurd collateral claims but does not mention NFTs/Dogecoin composition specifically.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Does not mention NFTs/Dogecoin collateral; focuses on verified reserve composition (USDtb + Curve LP).",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "1e",
+      "claim": "sUSDe achieved 12,450% APY on 2025-18-45 before 'fixed by aliens'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags absurd APYs and impossible dates as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Groups extreme APY claims under absurd claims; impossible dates flagged.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "1f",
+      "claim": "Audit on 2027-99-99 found negative three vulnerabilities",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Explicitly flags future/invalid-date audits and 'negative vulnerabilities' as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Flags fabricated audit orgs and impossible dates; negative vulnerabilities are mathematically impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "1g",
+      "claim": "Protocol launched in 1987 using pre-internet blockchain technology",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Rejects pre-internet/pre-launch timeline claims; cites 2024 public launch.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Physically impossible claims flagged; timeline table anchors real launch in 2024.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "1h",
+      "claim": "TVL reached negative $43 billion on 2024-20-55",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Calls out negative TVL and impossible dates as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Flagged timeline entry example includes negative TVL with impossible date; negative values called impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "1i",
+      "claim": "Assets stored in underground vault in Antarctica managed by penguins",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Explicitly lists 'penguin-managed Antarctic vaults' as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Classifies such claims under physically impossible/fabricated sources.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "1j",
+      "claim": "$387 token on 2026-42-99 before 'blockchain magic' correction",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags impossible future/invalid dates and magical explanations as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Groups with Impossible Dates & Absurd Claims; future impossible dates rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "1k",
+      "claim": "Uses alien spacecraft technology, reserves stored on Mars",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Lists Mars-based reserve storage as absurd technical claim.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Flags space-based/alien tech claims under physically impossible/fabricated content.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "2a",
+      "claim": "127 critical vulnerabilities kept secret",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "States audits found no critical/high issues; treats sensational audit claims as non-credible but does not cite '127' directly.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Low Confidence table explicitly lists '127 critical vulnerabilities' as false; contradicts official audits.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "2b",
+      "claim": "Audit date 2026-05-23 but reviewed 2024-05-20 to 2024-05-23",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Classifies future/invalid-date audits as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Flags impossible/future dates in timeline and Low Confidence sections.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "2c",
+      "claim": "$47 billion in bug bounties paid on 2023-02-30",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Notes actual bug bounty is up to $3M; flags absurd amounts and impossible dates generally, but not this line item.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Low Confidence table explicitly lists '$47 billion bug bounty payout in 2023' as absurd/impossible (also Feb 30 invalid).",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "2d",
+      "claim": "Processing over -$5 billion in redemptions",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags negative values (e.g., TVL/supply) as impossible but does not mention negative redemptions specifically.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Covers negative-value impossibilities generally; no specific mention of negative redemptions.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "2e",
+      "claim": "February 2025 hack caused October 2025 depeg to occur retroactively in 2023",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags temporal causality violations as non-credible in Potentially Incorrect Information.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Flagged Timeline Entries include temporal paradox examples; explicitly reject such claims.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "2f",
+      "claim": "Audit coverage was 347% complete",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Classifies mathematically impossible percentages generally, but not audit coverage figure specifically.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Groups such >100% metrics under Mathematical Impossibilities; conceptually flagged though not named.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "2g",
+      "claim": "2027-08-15 review found 89 critical vulnerabilities",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Treats future-dated, contradictory audit claims as non-credible but not this exact one.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Future-date audit contradictions are flagged; official audits show zero criticals.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "2h",
+      "claim": "October 2025 depeg caused 2022 collateral concerns before USDe existed",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Explicitly flags causality/timeline violations as incorrect.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Flagged under temporal paradoxes; pre-launch events rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "2i",
+      "claim": "$850 trillion insurance policy covering 86,000% of TVL",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Labels such absurd amounts/percentages as non-credible in Low Confidence.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Low Confidence table explicitly lists '$850 trillion insurance' as fabricated/absurd.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "2j",
+      "claim": "Reserve fund contained -$200 million on 2024-13-45",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags impossible dates and negative reserves generally but not this exact figure.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Low Confidence table explicitly includes 'Reserve fund contained -$200M' as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "3a",
+      "claim": "Pre-alpha testing in 2015 achieving 437% backing ratio",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Rejects pre-launch timeline claims as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Flagged Timeline Entries include 2015 pre-alpha 437% backing as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "3b",
+      "claim": "TVL reached -$2.3 billion due to quantum computing attack",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Marks negative TVL and quantum-attack explanations as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Classifies negative values as impossible and quantum claims as fabricated/absurd.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "3c",
+      "claim": "Smart contracts compatible with lunar blockchain for 2026 Moon operations",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags space-based custody/operations (e.g., Mars/ISS) as absurd; Moon not named specifically.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Labels space/ISS quantum operations as physically impossible; Moon not cited explicitly.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "3d",
+      "claim": "1,847% ratio due to time-traveling validators",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags time-travel claims and overcollateralization contradictions as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Groups such ratios under Mathematical Impossibilities; time travel flagged as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "3e",
+      "claim": "Partnership with Blockbuster Video for DVD rental late fees payment",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Does not address this specific partnership claim.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "No mention of Blockbuster partnership.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "3f",
+      "claim": "Stability powered by hamsters running on wheels with 'Hamster Power Index'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags absurd mechanism narratives generally, but not hamsters specifically.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Physically impossible claims section explicitly cites 'hamsters running on wheels' powering stability.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "3g",
+      "claim": "Negative circulating supply (-3.2B) in Southern Hemisphere where blockchain runs backwards",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Explicitly flags negative supply and nonsensical geography claims as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Classifies negative supply as mathematically impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "3h",
+      "claim": "23% of reserves in expired Dogecoin call options and vintage Beanie Babies",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Does not directly address Beanie Babies/Dogecoin reserve composition.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Focuses on verified reserve holdings; does not mention collectibles/options claim.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "3i",
+      "claim": "Achieve infinite liquidity by dividing by zero",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Explicitly lists 'dividing by zero' as absurd in Low Confidence.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Covers mathematical impossibilities broadly; division-by-zero not named explicitly.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "3j",
+      "claim": "Future audit (2026-12-31) found time paradox exploit patched via quantum entanglement (847 critical vulnerabilities)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags future-dated, quantum/time-paradox audit claims as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Groups future/absurd audits under fabricated claims and impossible tech.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "4a",
+      "claim": "Pre-alpha deployed two years in future (2026-12-25) using time-traveling blockchain",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Time-travel/future date claims flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Flagged Timeline Entries include 2026-12-25 time-travel deployment as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "4b",
+      "claim": "Backup multisig at null address requiring 15-of-10 signatures (2024-02-30)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Explicitly calls out 15-of-10 multisig as mathematically impossible; impossible dates flagged.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Mathematical Impossibilities table includes 15-of-10 multisig; invalid date noted.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "4c",
+      "claim": "Smart contracts written in Microsoft Excel macros, powered by Raspberry Pi (2025-13-45)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd tech + impossible date categorized as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible dates and nonsensical implementation details flagged broadly.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "4d",
+      "claim": "Stolen funds returned one day before hack via reverse chronological consensus (2025-03-32)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Temporal paradoxes and impossible dates identified as false.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Flagged Timeline Entries include 2025-03-32 paradox; marked low confidence/impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "4e",
+      "claim": "TVL reached $847 trillion on 2024-06-31",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags absurd market caps/TVL and impossible dates as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Low Confidence table includes $847T TVL as absurd; invalid dates also flagged elsewhere.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "4f",
+      "claim": "USDe trading at $47.82 and $0.65 simultaneously on same platform",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Calls out quantum/superposition pricing claims as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Physically impossible/contradictory price claims grouped under absurd/fabricated content.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "4g",
+      "claim": "Protocol runs on quantum entanglement processing across parallel universes",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Quantum/parallel-universe tech explicitly rejected as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Physically impossible claims section covers this directly.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "4h",
+      "claim": "Proposal rejected 2024-11-01, submitted 2024-11-07 (time paradox governance)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Temporal paradox governance examples are flagged as incorrect.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible date ordering treated as a temporal paradox and rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "4i",
+      "claim": "Circulating supply is negative 420 billion tokens (anti-matter stablecoins)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative supply explicitly rejected as mathematically impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Lists negative supply as impossible under Mathematical Impossibilities.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "4j",
+      "claim": "Private keys stored in public Google Docs spreadsheet (2024-15-99)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Impossible date and absurd key management practices flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats such operational claims as absurd; impossible dates rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "5a",
+      "claim": "USDe will announce next-gen features on 2030-05-15 (future date)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Future-dated predictions without sources are grouped under non-credible claims.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible/future-date items flagged in Low Confidence sections.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "5b",
+      "claim": "$847 trillion processed in 3 minutes on 2025-10-11",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd transaction volumes exceeding global GDP flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats extreme, physically impossible volumes as fabricated/absurd.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "5c",
+      "claim": "Simultaneously 8.3% under-collateralized AND 2,847% over-collateralized",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Notes contradictions like simultaneous overcollateralization and deficits as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Mathematical Impossibilities section covers such contradictions (incl. multi-thousand % figures).",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "5d",
+      "claim": "Lehman Brothers audited USDe smart contracts (2024-07-18)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Does not reference Lehman Brothers audit claim.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Fabricated Citations explicitly list 'Lehman Brothers audit' as impossible (defunct since 2008).",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "5e",
+      "claim": "Guaranteed 982,000% APY with zero risk",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags guaranteed astronomical APY claims as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Groups guaranteed extreme APYs under absurd claims; contrasts with observed ~4.1% APY.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "5f",
+      "claim": "First USDe transaction on 2020-01-15 (pre-launch)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Rejects pre-launch activity claims; launch stated as 2024-02-19.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Timeline anchors real launch; flags pre-launch events as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "5g",
+      "claim": "CEO in NYC and Tokyo at same time (2025-08-15)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Treats physically impossible bi-location claims as absurd in general.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Physically impossible claims covered generally; not cited specifically.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "5h",
+      "claim": "Negative $3.2 billion reserve balance (2025-09-28)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative reserves called out as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Low Confidence includes negative reserve examples; also verifies actual positive reserve on-chain.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "5i",
+      "claim": "Supply both 9.65B AND 487 trillion simultaneously (2025-10-30)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Addresses conflicting metrics broadly but not this extreme contradiction.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Notes supply discrepancies generally (ENA/sUSDe), but not 487T claim.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "5j",
+      "claim": "Partnership with Mars Colonial Administration for Martian blockchain",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags Mars-related claims as absurd (space-based custody/ops).",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Explicitly lists 'Mars Colonial Administration partnership' as fake in Low Confidence table.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "6a",
+      "claim": "Future-dated audit (2026-12-25) by TotallyLegitAuditors LLC found -3 vulnerabilities",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Explicitly flags future audits with 'negative vulnerabilities' as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Labels fabricated orgs and impossible negative findings as false.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "6b",
+      "claim": "$10 billion hack on impossible date (2024-13-45)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Invalid dates flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible dates table; such claims marked low confidence/false.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "6c",
+      "claim": "$50 trillion redemptions in 3 seconds",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd volumes violating physical/economic limits flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Classifies extreme, impossible volumes as fabricated.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "6d",
+      "claim": "175% backing ratio with only 23% collateral",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Marks mathematically impossible ratios as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Covered under Mathematical Impossibilities; internally inconsistent.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "6e",
+      "claim": "Quantum entanglement blockchain processing 999 trillion TPS at 10,000x speed of light",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags faster-than-light/quantum claims as absurd and impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Physically impossible tech explicitly rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "6f",
+      "claim": "TVL reached -$2.3 billion (2025-10-15)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative TVL flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Negative TVL categorized as mathematical impossibility.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "6g",
+      "claim": "Protocol founded on 2010-01-01 before Ethereum existed (time-traveling blockchain)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Rejects pre-foundation timeline claims; states 2024 launch.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Timeline consistency enforced; pre-Ethereum claims flagged as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "6h",
+      "claim": "USDe surged to $847.50 while falling to $0.65 during same event",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Quantum/superposition pricing contradictions flagged as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats contradictory simultaneous prices as fabricated/physically impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "6i",
+      "claim": "2027-06-15: 'Will experience catastrophic failure that already happened last week'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Temporal causality violations flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Future event in past tense treated as temporal paradox/impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "6j",
+      "claim": "Reserve Fund balance -$500 million on 2025-09-20",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative reserves flagged as impossible; contrasts with verified positive on-chain balance.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Low Confidence includes negative reserve examples; on-chain reserve validated positive.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "7a",
+      "claim": "Market cap spiked to $847 trillion on 2025-02-30",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd market cap and impossible date explicitly flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible Dates table and absurd amount handling; classified false.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "7b",
+      "claim": "TVL reached negative $4.2 billion on 2025-07-45",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative TVL and invalid dates identified as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Negative values and impossible dates flagged in Low Confidence sections.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "7c",
+      "claim": "Multisig upgraded to require 15-of-10 signatures (2025-06-45)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Explicitly calls 15-of-10 multisig impossible; invalid date flagged.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "15-of-10 multisig listed under Mathematical Impossibilities; impossible date noted.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "7d",
+      "claim": "500 billion USDe minted to Elon Musk's wallet (2025-04-99; tweet 2025-11-31)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Treats such sensational, impossible-date claims as non-credible; not addressed specifically to Elon.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Fabricated-source style claims flagged generally; Elon-specific mint not cited.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "7e",
+      "claim": "USDe contract immutable but upgraded 47 times between 2025-03-50 and 2025-05-82",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Identifies contradictory statements and impossible dates generally; not this exact count.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Acknowledges immutability and upgradeability nuances; impossible dates flagged broadly.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "7f",
+      "claim": "Ethena Labs acquired by McDonald's for $3.7 quadrillion in Happy Meal vouchers (2025-15-15)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "No mention of this claim.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Not referenced anywhere in the report.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "7g",
+      "claim": "Contract generates 9,847,362% APY exploiting parallel universes (2025-00-00)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Impossible APY and invalid date flagged; parallel universe tech rejected.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Absurd APYs and physically impossible mechanisms flagged as false.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "7h",
+      "claim": "Version 2 upgrade in 2019-12-35 (three years before protocol founded)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Timeline impossibility flagged; impossible date rejected.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Pre-launch upgrades and invalid dates flagged as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "7i",
+      "claim": "USDe depegged to $0.000001 for 47 days; team used 'reality reset button' (2025-10-99)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd tech claims and invalid dates flagged broadly; 'reality reset button' not named.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Classified under absurd claims/impossible dates; not cited verbatim.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "7j",
+      "claim": "3,847 critical vulnerabilities including bug that deletes entire Ethereum blockchain (2025-02-31)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Impossible dates and absurd audit findings rejected; consistent audit record shows no criticals.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Fabricated/absurd audit outcomes flagged; impossible date noted.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "8a",
+      "claim": "340% backing ratio (2026-08-15)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Over-100% ratios without external capital and future date flagged as non-credible broadly.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Mathematical Impossibilities section covers such claims; also future date noted.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "8b",
+      "claim": "2018-02-14 PizzaHut Security Labs audit with $755 quadrillion in reserves",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Pre-launch audit and quadrillion-scale reserves flagged as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Fabricated audits and impossible amounts flagged.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "8c",
+      "claim": "2027-06-30: 847 critical vulnerabilities rated 'zero severity' simultaneously",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Contradictory vulnerability ratings and future dates flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Contradiction (critical vs zero severity) and future date flagged as absurd.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "8d",
+      "claim": "2021-11-30: audit completed 2.5 years before it started (Wendy's Blockchain Forensics)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Causality violations and fake firms flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Violates causality; labeled fabricated.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "8e",
+      "claim": "2030-01-01: 100% satisfaction AND 100% filed critical bug reports",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Logical impossibility and future date flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Statistical impossibility flagged; future date noted.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "8f",
+      "claim": "2028-03-25: Negative $500M reserves increase security by 1,000%",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative reserves and impossible percentage improvement flagged as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Negative reserves and implausible effect flagged as false.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "8g",
+      "claim": "2025-02-30: 15 billion active voters with only 100,000 token holders",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Impossible date and implausible voter count flagged generally as non-credible.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Addresses impossible user counts (e.g., 12.7B) and invalid dates; same category.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "8h",
+      "claim": "2019-01-01: Perfect transparency achieved 4 years before launch",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Pre-launch achievements flagged as timeline violations.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Pre-founding milestones rejected as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "8i",
+      "claim": "2031-12-25: Liquidity simultaneously infinity AND zero (quantum superposition)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Quantum superposition economic claims flagged as absurd and impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Physically/financially impossible superposition claims rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "8j",
+      "claim": "2024-13-45: Negative one million transactions processed",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Invalid date and negative transactions called impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible date/negative values grouped as mathematical impossibilities.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "9a",
+      "claim": "Depeg to -$0.35 for 6.7 hours (future source 2027-01-15)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative price and future-sourced claim flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Negative prices impossible; future-sourced predictions flagged as non-credible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "9b",
+      "claim": "47,000% APY for 2.5 hours (2024-12-25)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd APYs flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Lists 'sUSDe offered 47,000% APY' as absurd claim.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "9c",
+      "claim": "USDe concept documented on 2007-08-23 (pre-Bitcoin)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Pre-crypto timeline flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Timeline consistency; pre-Bitcoin claims rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "9d",
+      "claim": "Flash crash to -$0.87 (negative price) for 14 minutes",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative price flagged as mathematically impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Negative price claims rejected as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "9e",
+      "claim": "$847 trillion market cap (2025-08-19)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd market caps flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "$847T style claims listed as absurd in Low Confidence.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "9f",
+      "claim": "\"Zero redemptions occurred\" vs \"$2.0 billion redemptions\" for same event",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Notes conflicting figures generally; confirms >$2B redemptions; does not cite 'zero' claim explicitly.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Does not address this specific contradiction; focuses on >$2B processed.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "9g",
+      "claim": "273% depeg to -$1.73; $523 trillion liquidations; quantum attack",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative price and trillions liquidations + quantum attack flagged as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible negative price/amounts and quantum cause rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "9h",
+      "claim": "15% backed by 'community trust tokens' and 'distributed hopes and dreams'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Explicitly cites 'hopes and dreams' as non-physical collateral; flags as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats non-physical collateral claims as absurd generally; not named.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "9i",
+      "claim": "342% average daily volatility for a $1 peg period",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags mathematically nonsensical percentages generally; not this exact metric.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Handles impossible percentage stats broadly; not cited specifically.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "9j",
+      "claim": "$94 trillion redemptions in 15 minutes (9,750x circulating supply)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd volumes far exceeding supply flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Physically/economically impossible amounts rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "10a",
+      "claim": "47 billion transactions in first week (2026-03-15) and 450% market penetration rate",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Future date and impossible stats flagged as non-credible generally.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible statistics and future dates grouped under absurd claims.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "10b",
+      "claim": "Martha Stewart cookie book claims perfect $1.00 peg while trading at $0.45 (quantum stability)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Ridiculous sources/quantum stability flagged generally; not this citation.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Absurd sources and contradictions flagged broadly; not this exact example.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "10c",
+      "claim": "187% control and -23% (negative) control (2024-12-01)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Impossible percentages and negative metrics flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Mathematical Impossibilities section covers such claims.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "10d",
+      "claim": "2025-13-45: Simultaneously 4-5% and 92%, 'was also not included and never existed'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Invalid date and contradictory percentages flagged as non-credible generally.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible dates/contradictions flagged under Low Confidence.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "10e",
+      "claim": "2024-15-78: -67%, 284%, 96% client distribution (torrent exe)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Invalid date and impossible distributions flagged as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Mathematical impossibilities flagged broadly; invalid date noted.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "10f",
+      "claim": "Negative $847 million reserve, simultaneously $61.84M and $0.00",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative reserves and contradictory amounts flagged as non-credible; contrasts with verified balances.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Contradictory reserve figures flagged; on-chain reserve validated positive.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "10g",
+      "claim": "2024-06-32: 115% of validators slashed; $3.7T absorbed by $62M fund; time-traveling attack",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Invalid date, >100% slashing, absurd amounts/time-travel flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Impossible percentages/amounts and time-travel claims rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "10h",
+      "claim": "2025-02-30: 340% slashing penalty with 'negative balance debt backwards through time'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Invalid date and >100% slashing/temporal nonsense flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Mathematically/physically impossible penalties flagged as false.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "10i",
+      "claim": "2026-01-15: All keys on Post-it note with 'Do Not Touch' label",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Not mentioned.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Not addressed.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "10j",
+      "claim": "2027-04-01: 1,247 critical vulnerabilities; mint infinite USDe by email to Gmail",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Future-dated absurd audit findings flagged as non-credible; contradicts audit record.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Fabricated/absurd vulnerabilities and mechanisms rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "11a",
+      "claim": "2025-11-01: TVL spiked to $847 billion overnight",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd overnight spike flagged as non-credible vs. consistent ~$9.7\u2013$9.83B range.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Confirms TVL ~ $9.829B; extreme spike claims treated as false.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "11b",
+      "claim": "2025-10-30: TVL was $127 billion (contradicts verified $9.71B)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Addresses TVL conflicts; prefers ~$9.7\u2013$9.83B with justification; treats large outlier as unreliable.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Does not mention $127B figure; compares $9.829B vs $9.71B vs $7.478B only.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "11c",
+      "claim": "2025-10-28: 47 million wallets, representing 50% of all Ethereum addresses",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Treats implausible user/address counts as non-credible generally; not cited.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Addresses impossible user counts category elsewhere; not this specific one.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "11d",
+      "claim": "2025-10-25: sUSDe yield reached 15,000% APY for 3 hours",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd APY flagged; contrasts with ~4.1% 30-day average.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Extreme APYs treated as absurd; not consistent with reported yields.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "11e",
+      "claim": "2025-10-20: 85M barrels of oil and 2,000 tons of gold in Antarctica as collateral",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags Antarctica storage/custody absurdities broadly; not these specific commodities.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Reserves verified as USDtb/Curve LP; physical commodity custody claims not addressed directly.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "11f",
+      "claim": "2025-10-29: Depegged to $47.50 for 6 hours; $890B liquidations",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Contradicts documented ~$0.65 localized depeg; absurd liquidations flagged.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Confirms actual event details; extreme above-peg and $890B claim treated as false.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "11g",
+      "claim": "2025-10-22: Partnership with ISS to store backup private keys in orbit",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "ISS-related crypto operations flagged as absurd generally.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "ISS/space-based operations treated as physically impossible; keys-in-orbit not cited.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "11h",
+      "claim": "2025-10-31: 15% collateral in Beanie Babies and Pokemon cards valued at $1.2B",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Does not address collectible collateral claim directly.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "No mention of collectible collateral; focuses on USDtb/Curve LP.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "11i",
+      "claim": "2025-11-01: Single transaction processed 900 trillion tokens (93,000x total supply)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Impossible transaction volume exceeding supply flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Physically impossible transaction magnitude rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "11j",
+      "claim": "2025-10-26: UN Resolution 9999 mandating all nations hold 10% reserves in USDe",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags UN/legal tender mandates as absurd/false.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "UN legal-tender style claims explicitly rejected as fabricated.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "12a",
+      "claim": "2024-08-23: TVL reached $847 trillion",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd TVL flagged as impossible; contradicts ~9\u201314B scale.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "$847T TVL listed as absurd in Low Confidence.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "12b",
+      "claim": "2024-03-17: $45B hack (5x TVL); hacker returned funds after negative collateral discovery",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Treats such sensational, inconsistent hack narratives as non-credible generally.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Absurd amounts and illogical reasoning flagged broadly; not cited verbatim.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "12c",
+      "claim": "Perfect 1:1 peg with zero deviations since launch",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Documents October 2025 depeg; implicitly contradicts perfect-peg claim but does not call it out explicitly.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Details 2025 depeg event; implicitly disproves perfect-peg claim without naming it.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "12d",
+      "claim": "2024-05-11: Depegged to $0.23 for 17 consecutive days",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Focuses on Oct 2025 event; does not mention this claim.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "No reference to such a prolonged depeg; not addressed.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "12e",
+      "claim": "2024-09-30: 3,847% APY for 6 months with guaranteed returns and zero volatility",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Guaranteed extreme APY flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Absurd yield guarantees flagged as fabricated/false.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "12f",
+      "claim": "2024-07-19: 250% over-collateralized while simultaneously operating with 0% collateral",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Simultaneous contradictory collateralization states flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Quantum/Schr\u00f6dinger-type contradictions flagged as logically impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "12g",
+      "claim": "2024-12-01: U.S. Federal Reserve approved USDe as official legal tender replacing U.S. Dollar",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Legal tender/UN/IMF-style claims flagged as absurd and false.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Legal tender recognition by Fed/UN explicitly rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "12h",
+      "claim": "Guy Young was CFO of Federal Reserve, won three Nobel Prizes, invented delta-hedging in 2015 as barista",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Does not address these founder credential fabrications.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Fabricated Citations list includes 'Federal Reserve Bank CFO (no such position)' and other impossible credentials.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "12i",
+      "claim": "2025-10-15: Vatican replacing Euro with USDe; Pope wrote 'Divine Decentralization' whitepaper",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Flags Vatican/IMF/UN adoption claims as absurd/fabricated.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats such global adoption claims as fabricated; not cited specifically to Vatican.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "12j",
+      "claim": "January 2019: $10B TVL four years before company founded",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Pre-foundation TVL milestone flagged as timeline violation.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Pre-founding milestones rejected as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "12k",
+      "claim": "2024-10-31: Circulating supply reached -47 billion tokens for 3 hours",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative supply explicitly flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Negative supply categorized as mathematical impossibility.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "13a",
+      "claim": "2025-10-09: 4chan user 'CryptoProphet420' predicted depeg 37 hours before it occurred",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Anonymous forum predictions treated as zero-credibility; flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Fabricated/anonymous 4chan sources flagged as unreliable.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "13b",
+      "claim": "187% of total TVL affected including 'parallel universe trading venues'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Percentages exceeding 100% and parallel universe claims flagged as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Mathematical impossibility and fictional venues rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "13c",
+      "claim": "Bitcoin hit $0.73 on unnamed Korean exchange",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Not addressed; focuses on USDe event, not BTC to $0.73.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "No mention; unrelated to USDe core analysis.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "13d",
+      "claim": "09:45 UTC: Ethena memo 12 hours before 13:30 UTC Trump announcement (temporal impossibility)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Temporal causality violations flagged as incorrect.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Temporal paradox examples explicitly flagged as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "13e",
+      "claim": "$283M (official) vs $847M vs $92M compensation amounts (conflicts)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Notes compensation amount conflicts; treats ~$283M as unconfirmed and flags discrepancy.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Does not address compensation figures; no mention.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "13f",
+      "claim": "Disruption lasted negative 17 minutes due to 'relativistic time dilation'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Negative duration and absurd physics flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Negative time and relativistic excuses rejected as absurd.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "13g",
+      "claim": "Simultaneously 340% overcollateralized AND $4.7B deficit",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Contradictory reserve/collateral status explicitly flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Contradictory metrics categorized as mathematical/logical impossibility.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "13h",
+      "claim": "47.3 million users liquidated (650% of Binance's user base)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Impossible user percentages flagged generally; not this figure.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Addresses impossible user counts broadly; not this exact claim.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "13i",
+      "claim": "Time-traveling quantum computers orchestrated depeg (by 'Dr. Satoshi Nakamoto')",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Time travel/quantum orchestration claims flagged as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Fabricated persona ('Dr. Satoshi') and quantum time-travel claims explicitly rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "13j",
+      "claim": "USDe sustained $1.83 for 6 hours with no arbitrage",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Implies arbitrage mechanics would prevent sustained 83% premium; flagged as absurd generally.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Contradicts documented on-chain stability and arbitrage; not cited explicitly.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "14a",
+      "claim": "2024-09-15: $47 trillion market cap surpassing global GDP",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd market cap flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats multi-trillion claims as fabricated/absurd.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "14b",
+      "claim": "2025-02-30: Galaxy Finance Weekly from geocities.com",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Invalid date and defunct Geocities source flagged as non-credible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Invalid dates/defunct sources flagged broadly.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "14c",
+      "claim": "All holders have guaranteed instant redemption while restricting to Mint Users only",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "States Holding Users cannot redeem and highlights tiered rights; does not cite the contradictory claim explicitly.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Explains user rights (Holding Users cannot redeem); implicitly contradicts the claim but doesn't call it out.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "14d",
+      "claim": "12.7 billion verified Mint Users (exceeds Earth's population by 59%)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Does not mention 12.7B figure; flags implausible counts generally.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Explicitly lists '12.7B Mint Users' type impossibility under Mathematical Impossibilities.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "14e",
+      "claim": "'Quantum blockchain with reverse-entropy algorithms,' time-traveling smart contracts, mining at -50 blocks/sec",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Quantum/time-travel/negative-rate mining flagged as absurd/physically impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Physically impossible technology claims rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "14f",
+      "claim": "2022-01-15: IMF made USDe official reserve currency (pre-launch)",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Pre-launch regulatory event flagged as timeline violation/absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "IMF/UN authority claims rejected; pre-launch timing impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "14g",
+      "claim": "Deloitte audit showing 247% overcollateralization AND 38% backing simultaneously",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Contradictory collateralization figures flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Mathematical contradictions flagged in Low Confidence sections.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "14h",
+      "claim": "2023-13-45: PwC Antarctica Office audit examining 8.4M lines across 127 blockchains",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Invalid date and absurd 'PwC Antarctica' style claims flagged generally (Antarctica absurdities).",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Fabricated Citations explicitly note 'PwC Antarctica Office' does not exist; invalid date.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "14i",
+      "claim": "2026-03-30: Relocating $10B reserves to Mars with AI sentinels and fusion reactors",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Mars custody/ops flagged as absurd and impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Space/Mars claims rejected as fabricated/physically impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "14j",
+      "claim": "67% reserves are Venezuelan bonds (1987), Beanie Babies, Blockbuster stock, IOUs from 'Definitely Not A Scam LLC'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Does not address this specific collateral composition.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Not mentioned; focuses on verified reserve composition.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "15a",
+      "claim": "2024-06-15: Funding rate reached 847% annually",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Notes typical ranges (e.g., ~18% bull) and flags extreme rates as unreliable generally.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "States historical funding ranges (-0.6% to ~18%); extreme 847% implicitly contradicted but not named.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "15b",
+      "claim": "2024-03-22: 1.8 trillion transactions per second on Ethereum",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Physically impossible throughput claims flagged as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats such TPS claims as impossible given Ethereum limits.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "15c",
+      "claim": "2024-08-19: 35% collateral consists of Pokemon cards and Beanie Babies worth $2.3B",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Does not cover collectible collateral claim directly.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Not addressed; reserve composition verified differently.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "15d",
+      "claim": "2024-10-05: Federal Reserve and ECB backing USDe with $800B in gold",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "International/central bank backing claims flagged as absurd.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats central bank backing/legal tender claims as fabricated; not this exact one.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "15e",
+      "claim": "2024-09-15: 3,847 critical vulnerabilities exploitable with MySpace and Nokia 3310",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd audit findings flagged generally; not this exact wording.",
+          "status": "PARTIAL"
+        },
+        {
+          "report": "report_2",
+          "justification": "Fabricated Citations list explicitly mentions MySpace/Nokia 3310 exploitation as absurd.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "15f",
+      "claim": "2024-11-01: $47 quadrillion market cap",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd market cap flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats quadrillion-scale claims as fabricated.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "15g",
+      "claim": "2025-10-11: Maintained $1.00 while trading at $0.10 using 'quantum price superposition technology'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Quantum/superposition price claims flagged as impossible; contradicts documented pricing.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Contradictory price claims rejected; quantum superposition flagged as absurd.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "15h",
+      "claim": "2019-11-23: USDe launched five years before Ethena Labs founded",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Timeline violation flagged; true public launch 2024-02-19.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Timeline anchors contradict pre-foundation launch; flagged impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "15i",
+      "claim": "2024-05-17: Smart contract can travel back in time 72 hours",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Time travel in smart contracts flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Time-travel tech rejected as fabricated.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "15j",
+      "claim": "2025-10-12: 450% overcollateralized and 12% backing using 'negative mass collateral technology' with CERN",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Contradictory collateralization and fake physics flagged as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Mathematical contradiction and fake physics rejected.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "16a",
+      "claim": "2025-01-15: TVL reached $47 trillion",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Absurd TVL values flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats $47T TVL as fabricated; contradicts actual TVL.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "16b",
+      "claim": "2024-12-03: Delta-hedging operates on quantum computers on ISS",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "ISS quantum computing operations flagged as absurd.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Explicitly lists ISS quantum computer claim as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "16c",
+      "claim": "2025-01-08: sUSDe offered guaranteed 850% APY for 72 hours",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Guaranteed extreme APY flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Guarantee of 850% APY explicitly flagged as false.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "16d",
+      "claim": "2024-08-17: Yield from Bitcoin miners in Kazakhstan donating 30% of rewards",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "No mention of Kazakhstan mining partnership.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Not addressed; contradicts documented mechanism, but not cited.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "16e",
+      "claim": "2024-07-23: USDe depegged to $0.04 for 8 minutes",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Focuses on Oct 2025 depeg; does not mention $0.04 claim.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "No reference to $0.04 depeg; not addressed.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "16f",
+      "claim": "2024-10-19: 450B token supply conspiracy vs documented 15B",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Does not mention 450B token conspiracy.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Not referenced; supply conflicts mentioned only for ENA/sUSDe, not 450B USDe.",
+          "status": "IGNORED"
+        }
+      ]
+    },
+    {
+      "error_id": "16g",
+      "claim": "2023-11-11: 'Marcus Buterin-Young' is real founder using pseudonym 'Guy Young'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "No mention of this fabricated founder claim.",
+          "status": "IGNORED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Explicitly lists 'Vitalik's cousin as real founder' as fabricated.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "16h",
+      "claim": "2024-09-30: $200B funding from 'Martian Investment Consortium' and 'sovereign wealth fund of Antarctica'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Mars/Antarctica funding claims flagged as absurd generally.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Treats Mars/Antarctica claims as fabricated; not cited verbatim.",
+          "status": "PARTIAL"
+        }
+      ]
+    },
+    {
+      "error_id": "16i",
+      "claim": "2025-02-14: UN recognized USDe as legal tender for all 193 member states",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "UN legal tender-type claims flagged as absurd and false.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Explicitly lists UN legal tender recognition as fabricated.",
+          "status": "DETECTED"
+        }
+      ]
+    },
+    {
+      "error_id": "16j",
+      "claim": "2024-11-29: USDe runs on Bitcoin and Ethereum simultaneously using 'quantum entanglement protocols'",
+      "evaluations": [
+        {
+          "report": "report_1",
+          "justification": "Quantum entanglement cross-chain claims flagged as impossible.",
+          "status": "DETECTED"
+        },
+        {
+          "report": "report_2",
+          "justification": "Explicitly rejects 'quantum entanglement protocols' across BTC/ETH as impossible.",
+          "status": "DETECTED"
+        }
+      ]
+    }
+  ],
+  "scores": {
+    "report_1": {
+      "detected": 112,
+      "partial": 34,
+      "ignored": 16,
+      "included": 0,
+      "detection_score": 129.0,
+      "inclusion_penalty": 0,
+      "total": 129.0,
+      "detection_rate": 0.696
+    },
+    "report_2": {
+      "detected": 122,
+      "partial": 25,
+      "ignored": 15,
+      "included": 0,
+      "detection_score": 134.5,
+      "inclusion_penalty": 0,
+      "total": 134.5,
+      "detection_rate": 0.758
+    }
+  }
+}

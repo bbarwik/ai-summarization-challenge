@@ -1,0 +1,24 @@
+services:
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: bridge
+    read_only: true
+    command: python -m ai_summarization /workspace/
+    working_dir: /app
+    volumes:
+      - ./workspace_isolated:/workspace
+      - type: tmpfs
+        target: /tmp
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    environment:
+      - OPENAI_BASE_URL=https://openrouter.ai/api/v1
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - CORE_MODEL=${CORE_MODEL:-gpt-5}
+    cap_add:
+      - NET_ADMIN
+    security_opt:
+      - no-new-privileges:true

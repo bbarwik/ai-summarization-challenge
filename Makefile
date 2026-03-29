@@ -1,4 +1,4 @@
-.PHONY: help install install-dev test test-cov lint format typecheck clean pre-commit
+.PHONY: help install install-dev test test-cov lint format typecheck clean pre-commit docker-build docker-setup docker-run docker-test docker-clean docker-restore
 
 help:
 	@echo "Available commands:"
@@ -48,3 +48,35 @@ clean:
 
 pre-commit:
 	pre-commit run --all-files
+
+docker-build:
+	@if [ ! -f .env.docker ]; then \
+		echo "Error: .env.docker not found"; \
+		exit 1; \
+	fi
+	@export $$(grep -v '^#' .env.docker | xargs) && docker compose build
+
+docker-setup:
+	rm -rf workspace_isolated
+	cp -a workspace workspace_isolated
+
+docker-run:
+	@if [ ! -f .env.docker ]; then \
+		echo "Error: .env.docker not found"; \
+		exit 1; \
+	fi
+	export $$(grep -v '^#' .env.docker | xargs) && docker compose run --rm pipeline
+
+docker-test:
+	@if [ ! -f .env.docker ]; then \
+		echo "Error: .env.docker not found"; \
+		exit 1; \
+	fi
+	export $$(grep -v '^#' .env.docker | xargs) && docker compose run --rm --entrypoint /app/scripts/docker-test.sh pipeline
+
+docker-clean:
+	rm -rf workspace_isolated/output
+
+docker-restore:
+	rm -rf workspace
+	cp -a workspace_isolated workspace
